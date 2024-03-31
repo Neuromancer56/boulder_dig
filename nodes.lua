@@ -28,7 +28,7 @@
     humidity_point = 98,
 })]]
 
-
+local score = 0
 
 function default.node_sound_boulder_defaults(table)
 	table = table or {}
@@ -59,6 +59,39 @@ minetest.register_node("boulder_dig:boulder", {
 		}
 	}
 })
+
+minetest.register_node("boulder_dig:gemstone", {
+	description = ("Gemtstone"),
+	tiles = {"default_stone.png^default_mineral_diamond.png"},
+	groups = {cracky = 1},
+	drop = "default:diamond",
+	sounds = default.node_sound_stone_defaults(),
+})
+
+
+local function gemstoneTouchAction(player)
+	local pos = player:get_pos()
+	--minetest.swap_node(pos, {name = "hero_mines:broken_mese_post_light", param2 = node.param2})
+	local got_gem = false
+	for dx = -2, 2 do
+		for dy = -2, 2 do
+			for dz = -2, 2 do
+				local neighbor_pos = {x = pos.x + dx, y = pos.y + dy, z = pos.z + dz}
+				local node = minetest.get_node(neighbor_pos)
+				
+				if node.name == "boulder_dig:gemstone" then
+					minetest.swap_node(neighbor_pos, {name = "air", param2 = node.param2})
+					got_gem = true
+				end
+			end
+		end
+	end
+	if got_gem then
+		minetest.sound_play("default_break_glass", {pos = pos, gain = 0.5, max_hear_distance = 10})
+		score = score + 10
+		minetest.log("x", "score:"..score)
+	end
+end
 
 --default_dug_node.1, default_dig_choppy.3
 
@@ -134,6 +167,8 @@ end
 
 -- Register global step action for magma nodes
 registerNodeTouchAction("default:dirt", dirtTouchAction)
+registerNodeTouchAction("boulder_dig:gemstone", gemstoneTouchAction)
+
 add_fall_damage("boulder_dig:boulder", 3)
 
 minetest.register_ore({
@@ -143,6 +178,17 @@ minetest.register_ore({
     clust_scarcity = 4 * 4 * 4,
     clust_num_ores = 8,
     clust_size = 3,
-    height_min = 1,
-    height_max = 31,
+    height_min = -31000,
+    height_max = 1000,
+})
+
+minetest.register_ore({
+    ore_type = "scatter",
+    ore = "boulder_dig:gemstone",
+    wherein = "default:dirt",
+    clust_scarcity = 4 * 4 * 4,
+    clust_num_ores = 8,
+    clust_size = 3,
+    height_min = -31000,
+    height_max = 1000,
 })
