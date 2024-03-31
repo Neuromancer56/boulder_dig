@@ -1,7 +1,6 @@
 --manual changes: 
 --E:\games\minetest-5.8.0-win64\games\minetest_game\mods\default\mapgen.lua L:7  minetest.register_alias("mapgen_stone", "default:stone") > minetest.register_alias("mapgen_stone", "default:dirt")
---E:\games\minetest-5.8.0-win64\mods\falling_item\init.lua  local L:3 function add_fall_damage(node, damage) > function add_fall_damage(node, damage)
---enable wielded light & give yourself a torch.
+--give yourself a torch & wield it.
 --[[minetest.override_item("default:gravel", {
     groups = {
         floored = 1,
@@ -28,37 +27,12 @@
     humidity_point = 98,
 })]]
 
+
+
+minetest.register_alias("mapgen_stone", "default:dirt")
 local score = 0
 
-function default.node_sound_boulder_defaults(table)
-	table = table or {}
-	table.footstep = table.footstep or
-			{name = "default_hard_footstep", gain = 0.25}
-	table.dig = table.dig or
-			{name = "default_dig_cracky", gain = 0.35}
-	table.dug = table.dug or
-			{name = "default_hard_footstep", gain = 1.0}
-	table.place = table.place or
-			{name = "default_dug_node", gain = 1.0}
-			--{name = "default_place_node", gain = 1.0}
-	default.node_sound_defaults(table)
-	return table
-end
 
-
-minetest.register_node("boulder_dig:boulder", {
-	description = "Boulder",
-	tiles = {"default_gravel.png"},
-	groups = {cracky = 2, falling_node = 1, falling_node_hurt =1},
-	sounds = default.node_sound_boulder_defaults(),
-	--sounds = default.node_sound_gravel_defaults(),
-	drop = {
-		max_items = 1,
-		items = {
-			{items = {"default:gravel"}}
-		}
-	}
-})
 
 minetest.register_node("boulder_dig:gemstone", {
 	description = ("Gemtstone"),
@@ -165,22 +139,9 @@ local dirt_dug = false
 	
 end
 
--- Register global step action for magma nodes
 registerNodeTouchAction("default:dirt", dirtTouchAction)
 registerNodeTouchAction("boulder_dig:gemstone", gemstoneTouchAction)
 
-add_fall_damage("boulder_dig:boulder", 3)
-
-minetest.register_ore({
-    ore_type = "scatter",
-    ore = "boulder_dig:boulder",
-    wherein = "default:dirt",
-    clust_scarcity = 4 * 4 * 4,
-    clust_num_ores = 8,
-    clust_size = 3,
-    height_min = -31000,
-    height_max = 1000,
-})
 
 minetest.register_ore({
     ore_type = "scatter",
