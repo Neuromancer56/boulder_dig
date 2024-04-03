@@ -27,9 +27,21 @@
     humidity_point = 98,
 })]]
 
+-- Loop through all registered biomes
+for name, def in pairs(minetest.registered_biomes) do
+    -- Check if the biome has a depth_filler parameter
+	minetest.log("x","name:"..name.." filler:"..def.depth_filler)
+    if def.depth_filler then
+        -- Override the depth_filler parameter
+        def.depth_filler = 30
+        
+        -- Unregister and re-register the biome with the new parameter
+        minetest.unregister_biome(name)
+        minetest.register_biome(def)
+    end
+end
 
-
-minetest.register_alias("mapgen_stone", "default:dirt")
+--minetest.register_alias("mapgen_stone", "default:dirt")
 local score = 0
 
 
