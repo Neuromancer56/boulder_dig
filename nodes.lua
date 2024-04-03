@@ -30,7 +30,7 @@
 -- Loop through all registered biomes
 for name, def in pairs(minetest.registered_biomes) do
     -- Check if the biome has a depth_filler parameter
-	minetest.log("x","name:"..name.." filler:"..def.depth_filler)
+--	minetest.log("x","name:"..name.." filler:"..def.depth_filler)
     if def.depth_filler then
         -- Override the depth_filler parameter
         def.depth_filler = 30
@@ -124,7 +124,7 @@ local dirt_dug = false
 				local neighbor_pos = {x = pos.x + dx, y = pos.y + dy, z = pos.z + dz}
 				local node = minetest.get_node(neighbor_pos)
 				
-				if node.name == "default:dirt" then
+				if (node.name == "default:dirt" or node.name == "default:dry_dirt" )then
 					minetest.set_node(neighbor_pos, {name = "air", param2 = node.param2})
 					dirt_dug = true
 							
@@ -152,13 +152,14 @@ local dirt_dug = false
 end
 
 registerNodeTouchAction("default:dirt", dirtTouchAction)
+registerNodeTouchAction("default:dry_dirt", dirtTouchAction)
 registerNodeTouchAction("boulder_dig:gemstone", gemstoneTouchAction)
 
-
+dirt = {"default:dirt","default:dry_dirt"}
 minetest.register_ore({
     ore_type = "scatter",
     ore = "boulder_dig:gemstone",
-    wherein = "default:dirt",
+    wherein = dirt,
     clust_scarcity = 4 * 4 * 4,
     clust_num_ores = 8,
     clust_size = 3,
