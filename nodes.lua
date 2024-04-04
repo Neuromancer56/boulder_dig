@@ -48,7 +48,7 @@ minetest.register_ore({
     ore = "boulder_dig:gemstone",
     wherein = dirt,
     --clust_scarcity = 7 * 7 * 7,
-	clust_scarcity = 11 * 11 * 11,
+	clust_scarcity = 10 * 10 * 10,
     clust_num_ores = 2,
     clust_size = 3,
     height_min = -31000,
