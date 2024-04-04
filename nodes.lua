@@ -8,10 +8,11 @@ local score = 0
 minetest.register_node("boulder_dig:gemstone", {
 	description = ("Gemtstone"),
 	--tiles = {"default_stone.png^default_mineral_diamond.png"},
-	tiles = {"amethyst.png"},
+	tiles = {"amethyst_star.png"},
 	groups = {cracky = 1},
 	drop = "boulder_dig:gemstone",
 	sounds = default.node_sound_stone_defaults(),
+	light_source = 5, 
 })
 
 
@@ -46,7 +47,8 @@ minetest.register_ore({
     ore_type = "scatter",
     ore = "boulder_dig:gemstone",
     wherein = dirt,
-    clust_scarcity = 7 * 7 * 7,
+    --clust_scarcity = 7 * 7 * 7,
+	clust_scarcity = 11 * 11 * 11,
     clust_num_ores = 2,
     clust_size = 3,
     height_min = -31000,
