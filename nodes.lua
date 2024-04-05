@@ -47,10 +47,11 @@ minetest.register_ore({
     ore_type = "scatter",
     ore = "boulder_dig:gemstone",
     wherein = dirt,
+	--7>11>9
     --clust_scarcity = 7 * 7 * 7,
-	clust_scarcity = 10 * 10 * 10,
-    clust_num_ores = 2,
-    clust_size = 3,
+	clust_scarcity = 9 * 9 * 9,
+    clust_num_ores = 8,
+    clust_size = 4,
     height_min = -31000,
     height_max = 1000,
 })
