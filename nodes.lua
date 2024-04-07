@@ -3,7 +3,18 @@
 
 local score = 0
 
-
+-- Check if the mob exists in the registry
+if mobs and mobs.mod and mobs.mod == "animalworld" then
+    local bat_def = mobs:alias_mob("animalworld:bat") -- Retrieve the mob definition
+    if bat_def then
+        -- Modify the property
+        bat_def.passive = false
+		bat_def.type = "monster"
+		bat_def.runaway = false
+		--minetest.unregister_mob("animalworld:bat")
+        --minetest.register_mob(bat_def)
+    end
+end
 
 minetest.register_node("boulder_dig:gemstone", {
 	description = ("Gemtstone"),
