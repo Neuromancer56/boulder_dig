@@ -3,18 +3,37 @@
 
 local score = 0
 
--- Check if the mob exists in the registry
-if mobs and mobs.mod and mobs.mod == "animalworld" then
-    local bat_def = mobs:alias_mob("animalworld:bat") -- Retrieve the mob definition
-    if bat_def then
-        -- Modify the property
-        bat_def.passive = false
-		bat_def.type = "monster"
-		bat_def.runaway = false
-		--minetest.unregister_mob("animalworld:bat")
-        --minetest.register_mob(bat_def)
-    end
+if minetest.get_modpath("animalworld") then
+	local bat_def = minetest.registered_entities["animalworld:bat"]
+	assert(bat_def, "animalworld:bat not found")
+	-- Override some properties of the bat entity
+			bat_def.passive = false
+			bat_def.type = "monster"
+			bat_def.runaway = false
+			bat_def.runaway_from = nil
 end
+
+-- Define a function to check if the shift key is pressed
+local function isShiftPressed(player)
+    local player_name = player:get_player_name()
+    local keys = player:get_player_control()
+    return keys["aux1"] -- 'aux1' represents the shift key
+end
+
+--[[
+-- Register an event handler to check for shift key presses
+minetest.register_globalstep(function(dtime)
+    for _, player in ipairs(minetest.get_connected_players()) do
+        if isShiftPressed(player) then
+            -- Shift key is pressed
+            minetest.log("x", "Shift key is pressed!")
+        else
+            -- Shift key is not pressed
+           -- minetest.chat_send_player(player:get_player_name(), "Shift key is not pressed.")
+        end
+    end
+end)
+]]
 
 minetest.register_node("boulder_dig:gemstone", {
 	description = ("Gemtstone"),
