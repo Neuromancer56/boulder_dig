@@ -13,35 +13,48 @@ if minetest.get_modpath("animalworld") then
 			bat_def.runaway_from = nil
 end
 
--- Define a function to check if the shift key is pressed
-local function isShiftPressed(player)
-    local player_name = player:get_player_name()
-    local keys = player:get_player_control()
-    return keys["aux1"] -- 'aux1' represents the shift key
+
+
+local function add_fall_damage(node, damage)
+
+	if minetest.registered_nodes[node] then
+
+		local group = minetest.registered_nodes[node].groups
+
+		group.falling_node_damage = damage
+
+		minetest.override_item(node, {groups = group})
+	else
+		print (node .. " not found to add falling_node_damage to")
+	end
 end
 
---[[
--- Register an event handler to check for shift key presses
-minetest.register_globalstep(function(dtime)
-    for _, player in ipairs(minetest.get_connected_players()) do
-        if isShiftPressed(player) then
-            -- Shift key is pressed
-            minetest.log("x", "Shift key is pressed!")
-        else
-            -- Shift key is not pressed
-           -- minetest.chat_send_player(player:get_player_name(), "Shift key is not pressed.")
-        end
-    end
-end)
-]]
+
+function default.node_sound_gem_defaults(table)
+	table = table or {}
+	table.footstep = table.footstep or
+			{name = "default_hard_footstep", gain = 0.25}
+	table.dig = table.dig or
+			{name = "default_dig_cracky", gain = 0.35}
+	table.dug = table.dug or
+			{name = "default_hard_footstep", gain = 1.0}
+	table.place = table.place or
+			{name = "sound_effect_twinkle_sparkle", gain = 1.0}
+	default.node_sound_defaults(table)
+	return table
+end
+
 
 minetest.register_node("boulder_dig:gemstone", {
 	description = ("Gemtstone"),
 	--tiles = {"default_stone.png^default_mineral_diamond.png"},
 	tiles = {"amethyst_star.png"},
-	groups = {cracky = 1},
+	groups = {cracky = 2, falling_node = 1, falling_node_hurt =1},
 	drop = "boulder_dig:gemstone",
-	sounds = default.node_sound_stone_defaults(),
+	sounds = default.node_sound_gem_defaults(),
+	on_construct = function(pos, node)
+		check_for_tumbling(pos,"boulder_dig:gemstone",{"boulder_dig:gemstone","boulders:boulder"},"sound_effect_twinkle_sparkle")
+		end,
 	light_source = 5, 
 })
 
@@ -64,13 +77,14 @@ local function gemstoneTouchAction(player)
 		end
 	end
 	if got_gem then
-		minetest.sound_play("default_break_glass", {pos = pos, gain = 0.5, max_hear_distance = 10})
+		minetest.sound_play("diamond_found", {pos = pos, gain = 0.5, max_hear_distance = 10})
 		score = score + 10
 		minetest.log("x", "score:"..score)
 	end
 end
 
 registerNodeTouchAction("boulder_dig:gemstone", gemstoneTouchAction)
+add_fall_damage("boulder_dig:gemstone", 4)
 
 dirt = {"default:dirt","default:dry_dirt"}
 minetest.register_ore({
