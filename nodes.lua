@@ -56,6 +56,9 @@ minetest.register_node("boulder_dig:gemstone", {
 		check_for_tumbling(pos,"boulder_dig:gemstone",{"boulder_dig:gemstone","boulders:boulder"},"sound_effect_twinkle_sparkle")
 		end,
 	light_source = 5, 
+	use_texture_alpha = true,
+	drawtype = "glasslike",
+	--sunlight_propagates = true,
 })
 
 
