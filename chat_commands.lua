@@ -12,7 +12,7 @@ local player = minetest.get_player_by_name(name)
                 local inventory = player:get_inventory()
 
                 -- Give the specified level item block
-                --inventory:add_item("main", item_name)
+                inventory:add_item("main", item_name)
                 
                 --minetest.chat_send_player(name, "Your inventory has been given the block to create hero mine level "..level_number..".")
             else
@@ -50,7 +50,6 @@ minetest.register_chatcommand("level", {
 	   level(name, param)
     end,
 })
-
 
 minetest.register_chatcommand("give_level", {
     params = "<level_number>",
