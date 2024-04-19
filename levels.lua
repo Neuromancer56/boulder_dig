@@ -4,15 +4,13 @@
 --levels
 --"defaultx:mese_post_lightx" > "hero_minesx:working_mese_post_lightx"
 local script_tables = {
-	--level 1
-	{
-		--screen 1
-		{"build_level", 30, 30, 30, .1, .05,8,.7,8,.7,8,.7},
-	},
 	--level 2
 	{
-		--screen 1
-		{"build_level", 10, 10, 10, .2, .2,8,.7,8,.7,8,.7},
+		{"build_level", 38, 21, 21, .1, .05,7,.7,7,.7,7,.7},
+	},
+	--level 3
+	{
+		{"build_level", 38, 21, 21, .18, .09,2,.07,2,.07,2,.07},
 	}
 	
 	
