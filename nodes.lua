@@ -1,8 +1,6 @@
 --manual changes: 
 --give yourself a torch & wield it.
 
-local score = 0
-
 if minetest.get_modpath("animalworld") then
 	local bat_def = minetest.registered_entities["animalworld:bat"]
 	assert(bat_def, "animalworld:bat not found")
@@ -81,8 +79,18 @@ local function gemstoneTouchAction(player)
 	end
 	if got_gem then
 		minetest.sound_play("diamond_found", {pos = pos, gain = 0.5, max_hear_distance = 10})
-		score = score + 10
-		minetest.log("x", "score:"..score)
+
+		if (levelGemsCollected >=levelInfo.gems_needed ) then
+			currentGemValue = levelInfo.gem_points_bonus
+		else 
+			currentGemValue = levelInfo.gem_points_regular
+		end
+		levelGemsCollected = levelGemsCollected + 1
+		
+		score = score + currentGemValue
+
+		
+		minetest.log("x", "Lvl:"..currentLevel.." Gem:"..levelGemsCollected.."of"..levelInfo.gems_needed.." Val:"..currentGemValue .." S:"..score.." HS:"..high_score)
 	end
 end
 

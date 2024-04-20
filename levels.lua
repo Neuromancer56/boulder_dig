@@ -6,7 +6,7 @@
 local script_tables = {
 	--level 2
 	{
-		{"build_level", 38, 21, 21, .1, .05,7,.7,7,.7,7,.7},
+		{"build_level", 38, 20, 21, .1, .05,7,.7,7,.7,7,.7},
 	},
 	--level 3
 	{
@@ -26,6 +26,10 @@ for level = 1, #script_tables do
         tiles = {"script_runner.png"},
         groups = {cracky = 3, oddly_breakable_by_hand = 1},
         on_punch = function(pos, node, puncher)
+			currentLevel = level
+			levelGemsCollected  = 0
+			levelInfo = getLevelInfo(currentLevel)
+			currentGemValue = levelInfo.gem_points_regular
             local script_table = script_tables[level]
             run_script(pos, script_table)
         end,
@@ -33,3 +37,17 @@ for level = 1, #script_tables do
 end
 
 
+
+
+--[[
+local levelNumber = 1
+local levelInfo = getLevelInfo(levelNumber)
+if levelInfo then
+    print("Level:", levelNumber)
+    print("Gems Needed:", levelInfo.gems_needed)
+    print("Regular Gem Points:", levelInfo.gem_points_regular)
+    print("Bonus Gem Points:", levelInfo.gem_points_bonus)
+else
+    print("Level information not found for level:", levelNumber)
+end
+]]
