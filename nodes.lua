@@ -88,8 +88,9 @@ local function gemstoneTouchAction(player)
 		levelGemsCollected = levelGemsCollected + 1
 		
 		score = score + currentGemValue
-
-		
+		if (score > high_score) then
+			high_score= score
+		end
 		minetest.log("x", "Lvl:"..currentLevel.." Gem:"..levelGemsCollected.."of"..levelInfo.gems_needed.." Val:"..currentGemValue .." S:"..score.." HS:"..high_score)
 	end
 end

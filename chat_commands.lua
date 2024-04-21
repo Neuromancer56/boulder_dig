@@ -22,7 +22,7 @@ local player = minetest.get_player_by_name(name)
             minetest.chat_send_player(name, "Player not found.")
         end
 end
-
+--[[
 local function clear_inv(name, param)
         local player = minetest.get_player_by_name(name)
         if player then
@@ -38,7 +38,51 @@ local function clear_inv(name, param)
         else
             minetest.chat_send_player(name, "Player not found.")
         end
+end]]
+
+local function prep_inv(name, param)
+    local player = minetest.get_player_by_name(name)
+    if player then
+        local inventory = player:get_inventory()
+        --inventory:set_list("main", {}) -- Uncomment if you want to clear the entire inventory
+
+        -- Check if the player already has a diamond sword
+        local has_diamond_sword = false
+        local main_list = inventory:get_list("main")
+        for _, item in ipairs(main_list) do
+            if item:get_name() == "default:sword_diamond" then
+                has_diamond_sword = true
+                break
+            end
+        end
+        -- If the player doesn't have a diamond sword, add one
+        if not has_diamond_sword then
+            inventory:add_item("main", "default:sword_diamond")
+        end
+
+        -- Check for existing torch stack
+        local torch_index
+        for index, item in ipairs(main_list) do
+            if item:get_name() == "default:torch"  then
+                torch_index = index
+                break
+            end
+        end
+        -- If found, set the count to 99, else add a new stack
+        if torch_index then
+            local stack = inventory:get_stack("main", torch_index)
+            stack:set_count(99)
+            inventory:set_stack("main", torch_index, stack)
+        else
+            inventory:add_item("main", "default:torch 99")
+        end
+
+        minetest.chat_send_player(name, "Your inventory has had the essential items added to it.")
+    else
+        minetest.chat_send_player(name, "Player not found.")
+    end
 end
+
 
 
 minetest.register_chatcommand("level", {
@@ -46,7 +90,7 @@ minetest.register_chatcommand("level", {
     description = "Prepares inventory and health for boulder dig level.",
     privs = {interact = true},
     func = function(name, param)
-       clear_inv(name, param)
+       prep_inv(name, param)
 	   level(name, param)
     end,
 })
@@ -60,11 +104,11 @@ minetest.register_chatcommand("give_level", {
     end,
 })
 
-minetest.register_chatcommand("clear_inv", {
+minetest.register_chatcommand("prep_inv", {
     params = "",
     description = "Clears inventory and replaces it with the only items you should use at start of hero mine level",
     privs = {interact = true},
     func = function(name, param)
-       clear_inv(name, param)
+       prep_inv(name, param)
     end,
 })

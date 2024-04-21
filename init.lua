@@ -1,7 +1,7 @@
 levels = {
-    [0] = {gems_needed = 1000, gem_points_regular = 0, gem_points_bonus = 0},
-	[1] = {gems_needed = 10, gem_points_regular = 20, gem_points_bonus = 50},
-    [2] = {gems_needed = 24, gem_points_regular = 15, gem_points_bonus = 0},
+    [0] = {gems_needed = 1000, gem_points_regular = 0, gem_points_bonus = 0, x_start_loc= 0, y_start_loc=0 , z_start_loc = 0},
+	[1] = {gems_needed = 10, gem_points_regular = 20, gem_points_bonus = 50, x_start_loc= 10, y_start_loc=17 , z_start_loc = 10},
+    [2] = {gems_needed = 24, gem_points_regular = 15, gem_points_bonus = 0, x_start_loc= 10, y_start_loc=17 , z_start_loc = 10},
     -- Add more levels as needed
 }
 high_score= 0

@@ -1,4 +1,12 @@
 
+local function teleportPlayer(player, pos)
+    --local pos = player:get_pos() -- Get the player's current position
+    pos.x = pos.x + levelInfo.x_start_loc  
+    pos.y = pos.y + levelInfo.y_start_loc  
+    pos.z = pos.z + levelInfo.z_start_loc
+    player:set_pos(pos) -- Teleport the player to the new position
+end
+
 
 --https://www.youtube.com/watch?v=bpzN0fagzi8&t=42s
 --levels
@@ -7,14 +15,19 @@ local script_tables = {
 	--level 2
 	{
 		{"build_level", 38, 20, 21, .1, .05,7,.7,7,.7,7,.7},
+		{"move", "x", 10},
+		{"move", "y", 17},
+		{"move", "z", 10},
+		{"fill_box", 2, 2, 2, "X", "air", "default:torch", "T", 1},
 	},
 	--level 3
 	{
 		{"build_level", 38, 21, 21, .18, .09,2,.07,2,.07,2,.07},
+		{"move", "x", 10},
+		{"move", "y", 17},
+		{"move", "z", 10},
+		{"fill_box", 2, 2, 2, "X", "air", "default:torch", "T", 1},
 	}
-	
-	
-
 }
 
 --https://www.youtube.com/watch?v=bpzN0fagzi8&t=42s
@@ -32,6 +45,7 @@ for level = 1, #script_tables do
 			currentGemValue = levelInfo.gem_points_regular
             local script_table = script_tables[level]
             run_script(pos, script_table)
+			teleportPlayer(puncher, pos)
         end,
     })
 end
