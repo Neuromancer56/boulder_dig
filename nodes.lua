@@ -121,3 +121,78 @@ minetest.register_ore({
     height_min = -31000,
     height_max = 1000,
 })
+
+
+local portal_animation2 = {
+	name = "nether_portal_alt.png",
+	animation = {
+		type = "vertical_frames",
+		aspect_w = 16,
+		aspect_h = 16,
+		length = 0.5,
+	},
+}
+
+
+------------
+function create_and_enter_level(level, pos, player)
+	minetest.sound_play("teleport", {pos = pos, gain = 0.5, max_hear_distance = 10})
+	currentLevel = level
+	levelGemsCollected  = 0
+	levelInfo = getLevelInfo(currentLevel)
+	currentGemValue = levelInfo.gem_points_regular
+	local script_table = script_tables[level]
+	run_script(pos, script_table)
+	teleportPlayer(player, pos)
+end
+
+local function exitTouchAction(player)
+	currentLevel = currentLevel +1
+	create_and_enter_level(currentLevel, level_start_pos, player)
+
+end
+
+-- Register the node
+minetest.register_node("boulder_dig:exit", {
+    description = "Animated Node",
+   -- tiles = {"nether_portal.png"}, -- Path to first frame
+   	tiles = {
+		portal_animation2
+	},
+   -- groups = {cracky = 3, oddly_breakable_by_hand = 3},
+    paramtype = "light",
+    light_source = 5,
+})
+
+-- Function to update node texture
+local function update_texture(pos)
+    local meta = minetest.get_meta(pos)
+    local frame = tonumber(meta:get_string("frame")) or 1
+    local num_frames = 10 -- Total number of frames
+    frame = (frame % num_frames) + 1
+    meta:set_string("frame", tostring(frame))
+    minetest.get_node_timer(pos):start(0.5) -- Adjust time interval as needed
+    minetest.swap_node(pos, {name = "boulder_dig:exit", param2 = frame})
+end
+
+-- Register globalstep to update texture
+minetest.register_globalstep(function(dtime)
+    for _, player in ipairs(minetest.get_connected_players()) do
+        local pos = player:get_pos()
+        if pos then
+            local node_pos = {x = math.floor(pos.x), y = math.floor(pos.y), z = math.floor(pos.z)}
+            local node = minetest.get_node(node_pos)
+            if node.name == "boulder_dig:exit" then
+                update_texture(node_pos)
+            end
+        end
+    end
+end)
+
+registerNodeTouchAction("boulder_dig:exit", exitTouchAction)
+
+
+
+
+
+
