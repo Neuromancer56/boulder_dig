@@ -64,19 +64,29 @@ local function gemstoneTouchAction(player)
 	local pos = player:get_pos()
 	--minetest.swap_node(pos, {name = "hero_mines:broken_mese_post_light", param2 = node.param2})
 	local got_gem = false
-	for dx = -2, 2 do
-		for dy = -2, 2 do
-			for dz = -2, 2 do
+	
+	local x_offset, z_offset= get_direction_offsets(player)
+	--minetest.log("x","x_start:"..x_start..", x_end:"..x_end)	
+	--minetest.log("x","z_start:"..z_start..", z_end:"..z_end)	
+	for dx = x_offset, x_offset do
+		--minetest.log("x","dx:"..dx)	
+		for dy = 0, 1 do
+			for dz = z_offset, z_offset do
+				--minetest.log("x","dz:"..dz)	
 				local neighbor_pos = {x = pos.x + dx, y = pos.y + dy, z = pos.z + dz}
 				local node = minetest.get_node(neighbor_pos)
 				
-				if node.name == "boulder_dig:gemstone" then
-					minetest.swap_node(neighbor_pos, {name = "air", param2 = node.param2})
-					got_gem = true
+				if (node.name == "boulder_dig:gemstone" )then
+					minetest.set_node(neighbor_pos, {name = "air", param2 = node.param2})
+					got_gem = true	
 				end
 			end
 		end
 	end
+	
+	
+	
+	
 	if got_gem then
 		minetest.sound_play("diamond_found", {pos = pos, gain = 0.5, max_hear_distance = 10})
 
