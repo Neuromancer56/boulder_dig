@@ -29,7 +29,9 @@ initializeVariables()
 script_tables = {
 	--level 2
 	{
-		{"build_level", 38, 20, 21, .1, .05,7,.7,7,.7,7,.7},
+		{"build_level", 38, 20, 21, .1, .05,7,.6,7,.6,7,.6},
+		{"place_node",35,2,10,"boulder_dig:exit", true},
+		{"place_node",2,2,15,"boulder_dig:exit", true},
 		{"move", "x", 10},
 		{"move", "y", 17},
 		{"move", "z", 10},
@@ -38,6 +40,8 @@ script_tables = {
 	--level 3
 	{
 		{"build_level", 38, 21, 21, .18, .09,2,.07,2,.07,2,.07},
+		{"place_node",35,2,10,"boulder_dig:exit", true},
+		{"place_node",2,2,15,"boulder_dig:exit", true},
 		{"move", "x", 10},
 		{"move", "y", 17},
 		{"move", "z", 10},

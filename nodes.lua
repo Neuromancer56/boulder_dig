@@ -84,9 +84,6 @@ local function gemstoneTouchAction(player)
 		end
 	end
 	
-	
-	
-	
 	if got_gem then
 		minetest.sound_play("diamond_found", {pos = pos, gain = 0.5, max_hear_distance = 10})
 
