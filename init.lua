@@ -53,10 +53,12 @@ script_tables = {
 		{"build_level", 38, 4, 21, .18, .00,10,.00,10,.00,10,.00},
 		{"place_node",35,2,10,"boulder_dig:exit", true},
 		{"place_node",2,2,15,"boulder_dig:exit", true},
+		{"place_node",17,1,2,"boulder_dig:amoeba", true},
 		{"move", "x", 2},
 		{"move", "y", 2},
-		{"move", "z", 2},
+		{"move", "z", 2},		
 		{"fill_box", 2, 2, 2, "X", "air", "default:torch", "T", 1},
+		
 	}
 }
 
