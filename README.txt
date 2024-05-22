@@ -7,6 +7,9 @@ Licenses:
 Code: MIT
 Texture and models: CC BY-SA 3.0
 
+Note Amoeba code & media is a forked version of the mykota mod by xevin, Stepan Krapivin xevinbox@gmail.com.  It has been tweaked by me to bring it more in line with the
+needs of the boulder_dig game.
+
 see LICENSE.txt
 
 -------------------------------------------------------------------------------

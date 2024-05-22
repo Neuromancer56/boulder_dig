@@ -2,6 +2,7 @@ levels = {
     [0] = {gems_needed = 1000, gem_points_regular = 0, gem_points_bonus = 0, x_start_loc= 0, y_start_loc=0 , z_start_loc = 0},
 	[1] = {gems_needed = 10, gem_points_regular = 20, gem_points_bonus = 50, x_start_loc= 10, y_start_loc=17 , z_start_loc = 10},
     [2] = {gems_needed = 24, gem_points_regular = 15, gem_points_bonus = 0, x_start_loc= 10, y_start_loc=17 , z_start_loc = 10},
+	[3] = {gems_needed = 24, gem_points_regular = 15, gem_points_bonus = 0, x_start_loc= 1, y_start_loc=1 , z_start_loc = 1},
     -- Add more levels as needed
 }
 high_score= 0
@@ -46,6 +47,16 @@ script_tables = {
 		{"move", "y", 17},
 		{"move", "z", 10},
 		{"fill_box", 2, 2, 2, "X", "air", "default:torch", "T", 1},
+	},
+	--amoeba 
+	{
+		{"build_level", 38, 4, 21, .18, .00,10,.00,10,.00,10,.00},
+		{"place_node",35,2,10,"boulder_dig:exit", true},
+		{"place_node",2,2,15,"boulder_dig:exit", true},
+		{"move", "x", 2},
+		{"move", "y", 2},
+		{"move", "z", 2},
+		{"fill_box", 2, 2, 2, "X", "air", "default:torch", "T", 1},
 	}
 }
 
@@ -61,6 +72,7 @@ end
 dofile(minetest.get_modpath("boulder_dig").."/nodes.lua")
 dofile(minetest.get_modpath("boulder_dig").."/chat_commands.lua")
 dofile(minetest.get_modpath("boulder_dig").."/levels.lua")
+dofile(minetest.get_modpath("boulder_dig").."/amoeba.lua")
 
 
 minetest.register_on_dieplayer(function(player)
