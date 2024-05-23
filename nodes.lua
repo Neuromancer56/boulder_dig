@@ -78,6 +78,7 @@ local function gemstoneTouchAction(player)
 				
 				if (node.name == "boulder_dig:gemstone" )then
 					minetest.set_node(neighbor_pos, {name = "air", param2 = node.param2})
+					minetest.check_for_falling(neighbor_pos)
 					got_gem = true	
 				end
 			end
@@ -85,8 +86,7 @@ local function gemstoneTouchAction(player)
 	end
 	
 	if got_gem then
-		minetest.sound_play("diamond_found", {pos = pos, gain = 0.5, max_hear_distance = 10})
-
+		minetest.sound_play("diamond_found", {pos = pos, gain = 0.5, max_hear_distance = 10})		
 		if (levelGemsCollected >=levelInfo.gems_needed ) then
 			currentGemValue = levelInfo.gem_points_bonus
 		else 
@@ -148,6 +148,20 @@ local function exitTouchAction(player)
 	create_and_enter_level(currentLevel, level_start_pos, player)
 
 end
+
+
+-- Register the node
+minetest.register_node("boulder_dig:exit_dormant", {
+    description = "Dormant Exit",
+   -- tiles = {"nether_portal.png"}, -- Path to first frame
+   	tiles = {
+		portal_animation2
+	},
+   -- groups = {cracky = 3, oddly_breakable_by_hand = 3},
+    paramtype = "light",
+    light_source = 5,
+})
+
 
 -- Register the node
 minetest.register_node("boulder_dig:exit", {
