@@ -1,3 +1,17 @@
+local function logTable(tableToLog)
+    minetest.log("loggedTable", "Logging table contents:")
+    
+    -- Iterate over each key-value pair in the table
+    for key, value in pairs(tableToLog) do
+        -- Convert the value to a string for logging
+        local valueString = tostring(value)
+        
+        -- Log the key-value pair
+        minetest.log("loggedTable", key .. ": " .. valueString)
+    end
+    
+    minetest.log("loggedTable", "End of table logging.")
+end
 levels = {
     [0] = {gems_needed = 1000, gem_points_regular = 0, gem_points_bonus = 0, x_start_loc= 0, y_start_loc=0 , z_start_loc = 0},
 	[1] = {gems_needed = 10, gem_points_regular = 20, gem_points_bonus = 50, x_start_loc= 10, y_start_loc=17 , z_start_loc = 10},
@@ -7,6 +21,7 @@ levels = {
 }
 high_score= 0
 level_start_pos = vector.new(0, 0, 0)
+
 -- Function to get level information based on the provided level number
 function getLevelInfo(level)
     return levels[level]
@@ -31,8 +46,8 @@ script_tables = {
 	--level 2
 	{
 		{"build_level", 38, 20, 21, .1, .05,7,.6,7,.6,7,.6},
-		{"place_node",35,2,10,"boulder_dig:exit", true},
-		{"place_node",2,2,15,"boulder_dig:exit", true},
+		{"place_node",35,2,10,"boulder_dig:exit_dormant", true},
+		{"place_node",2,2,15,"boulder_dig:exit_dormant", true},
 		{"move", "x", 10},
 		{"move", "y", 17},
 		{"move", "z", 10},
@@ -41,8 +56,8 @@ script_tables = {
 	--level 3
 	{
 		{"build_level", 38, 21, 21, .18, .09,2,.07,2,.07,2,.07},
-		{"place_node",35,2,10,"boulder_dig:exit", true},
-		{"place_node",2,2,15,"boulder_dig:exit", true},
+		{"place_node",35,2,10,"boulder_dig:exit_dormant", true},
+		{"place_node",2,2,15,"boulder_dig:exit_dormant", true},
 		{"move", "x", 10},
 		{"move", "y", 17},
 		{"move", "z", 10},
@@ -51,14 +66,32 @@ script_tables = {
 	--amoeba 
 	{
 		{"build_level", 38, 4, 21, .18, .00,10,.00,10,.00,10,.00},
-		{"place_node",35,2,10,"boulder_dig:exit", true},
-		{"place_node",2,2,15,"boulder_dig:exit", true},
+		{"place_node",35,2,10,"boulder_dig:exit_dormant", true},
+		{"place_node",2,2,15,"boulder_dig:exit_dormant", true},
 		{"place_node",17,1,2,"boulder_dig:amoeba", true},
 		{"move", "x", 2},
 		{"move", "y", 2},
 		{"move", "z", 2},		
 		{"fill_box", 2, 2, 2, "X", "air", "default:torch", "T", 1},
 		
+	}
+}
+
+exit_script_table = {
+	--level 2
+	{
+		{"place_node",35,2,10,"boulder_dig:exit", true},
+		{"place_node",2,2,15,"boulder_dig:exit", true},
+	},
+	--level 3
+	{
+		{"place_node",35,2,10,"boulder_dig:exit", true},
+		{"place_node",2,2,15,"boulder_dig:exit", true},
+	},
+	--amoeba 
+	{
+		{"place_node",35,2,10,"boulder_dig:exit", true},
+		{"place_node",2,2,15,"boulder_dig:exit", true},
 	}
 }
 

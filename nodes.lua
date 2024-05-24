@@ -60,6 +60,14 @@ minetest.register_node("boulder_dig:gemstone", {
 })
 
 
+
+local function enableExitNode()
+	local script_table = exit_script_table[currentLevel]
+	--minetest.log("x", "level_start_pos")
+	--logTable(level_start_pos)
+	run_script(level_start_pos, script_table)
+end
+
 local function gemstoneTouchAction(player)
 	local pos = player:get_pos()
 	--minetest.swap_node(pos, {name = "hero_mines:broken_mese_post_light", param2 = node.param2})
@@ -89,6 +97,7 @@ local function gemstoneTouchAction(player)
 		levelGemsCollected = levelGemsCollected + 1
 		if (levelGemsCollected == levelInfo.gems_needed ) then
 			minetest.sound_play("sonic-wave-75405x", {pos = pos, gain = 0.5, max_hear_distance = 10})
+			enableExitNode()
 		end
 		minetest.sound_play("diamond_found", {pos = pos, gain = 0.5, max_hear_distance = 10})		
 		if (levelGemsCollected >levelInfo.gems_needed ) then
@@ -124,8 +133,8 @@ minetest.register_ore({
 })
 
 
-local portal_animation2 = {
-	name = "nether_portal_alt.png",
+local portal_animationRed = {
+	name = "nether_portal_alt.png^[colorize:red:120",
 	animation = {
 		type = "vertical_frames",
 		aspect_w = 16,
@@ -133,6 +142,17 @@ local portal_animation2 = {
 		length = 0.5,
 	},
 }
+
+local portal_animationGreen = {
+	name = "nether_portal_alt.png^[colorize:green:120",
+	animation = {
+		type = "vertical_frames",
+		aspect_w = 16,
+		aspect_h = 16,
+		length = 0.5,
+	},
+}
+
 
 
 ------------
@@ -158,12 +178,18 @@ local function exitTouchAction(player)
 end
 
 
+
 -- Register the node
 minetest.register_node("boulder_dig:exit_dormant", {
     description = "Dormant Exit",
    -- tiles = {"nether_portal.png"}, -- Path to first frame
    	tiles = {
-		portal_animation2
+		portal_animationRed
+	},
+	post_effect_color = {
+		-- hopefully blue enough to work with blue portals, and green enough to
+		-- work with cyan portals.
+		a = 120, r = 188,  g = 0, b = 0
 	},
    -- groups = {cracky = 3, oddly_breakable_by_hand = 3},
     paramtype = "light",
@@ -173,16 +199,22 @@ minetest.register_node("boulder_dig:exit_dormant", {
 
 -- Register the node
 minetest.register_node("boulder_dig:exit", {
-    description = "Animated Node",
+    description = "Exit",
    -- tiles = {"nether_portal.png"}, -- Path to first frame
    	tiles = {
-		portal_animation2
+		portal_animationGreen
+	},
+	post_effect_color = {
+		-- hopefully blue enough to work with blue portals, and green enough to
+		-- work with cyan portals.
+		a = 120, r = 0, g = 128, b = 188
 	},
    -- groups = {cracky = 3, oddly_breakable_by_hand = 3},
     paramtype = "light",
     light_source = 5,
 })
 
+--[[
 -- Function to update node texture
 local function update_texture(pos)
     local meta = minetest.get_meta(pos)
@@ -207,8 +239,10 @@ minetest.register_globalstep(function(dtime)
         end
     end
 end)
-
+]]
 registerNodeTouchAction("boulder_dig:exit", exitTouchAction)
+registerNodeTouchAction("boulder_dig:exit_dormant", exitTouchAction)
+
 
 
 
