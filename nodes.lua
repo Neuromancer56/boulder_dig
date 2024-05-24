@@ -86,15 +86,17 @@ local function gemstoneTouchAction(player)
 	end
 	
 	if got_gem then
-		minetest.sound_play("diamond_found", {pos = pos, gain = 0.5, max_hear_distance = 10})		
-		if (levelGemsCollected >=levelInfo.gems_needed ) then
-			currentGemValue = levelInfo.gem_points_bonus
+		levelGemsCollected = levelGemsCollected + 1
+		if (levelGemsCollected == levelInfo.gems_needed ) then
 			minetest.sound_play("sonic-wave-75405x", {pos = pos, gain = 0.5, max_hear_distance = 10})
-			
+		end
+		minetest.sound_play("diamond_found", {pos = pos, gain = 0.5, max_hear_distance = 10})		
+		if (levelGemsCollected >levelInfo.gems_needed ) then
+			currentGemValue = levelInfo.gem_points_bonus
 		else 
 			currentGemValue = levelInfo.gem_points_regular
 		end
-		levelGemsCollected = levelGemsCollected + 1
+		
 		
 		score = score + currentGemValue
 		if (score > high_score) then
@@ -146,9 +148,13 @@ function create_and_enter_level(level, pos, player)
 end
 
 local function exitTouchAction(player)
-	currentLevel = currentLevel +1
-	create_and_enter_level(currentLevel, level_start_pos, player)
-
+	if (levelGemsCollected < levelInfo.gems_needed ) then
+		minetest.sound_play("teleport-error", {pos = pos, gain = 0.5, max_hear_distance = 10})
+	else
+		minetest.sound_play("teleport", {pos = pos, gain = 0.5, max_hear_distance = 10})
+		currentLevel = currentLevel +1
+		create_and_enter_level(currentLevel, level_start_pos, player)
+	end
 end
 
 
