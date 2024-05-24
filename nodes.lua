@@ -89,6 +89,8 @@ local function gemstoneTouchAction(player)
 		minetest.sound_play("diamond_found", {pos = pos, gain = 0.5, max_hear_distance = 10})		
 		if (levelGemsCollected >=levelInfo.gems_needed ) then
 			currentGemValue = levelInfo.gem_points_bonus
+			minetest.sound_play("sonic-wave-75405x", {pos = pos, gain = 0.5, max_hear_distance = 10})
+			
 		else 
 			currentGemValue = levelInfo.gem_points_regular
 		end
