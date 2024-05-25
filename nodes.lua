@@ -160,11 +160,15 @@ function create_and_enter_level(level, pos, player)
 	minetest.sound_play("teleport", {pos = pos, gain = 0.5, max_hear_distance = 10})
 	currentLevel = level
 	levelGemsCollected  = 0
-	levelInfo = getLevelInfo(currentLevel)
-	currentGemValue = levelInfo.gem_points_regular
-	local script_table = script_tables[level]
-	run_script(pos, script_table)
-	teleportPlayer(player, pos)
+	if(currentLevel<=#levels) then
+		levelInfo = getLevelInfo(currentLevel)
+		currentGemValue = levelInfo.gem_points_regular
+		local script_table = script_tables[level]
+		run_script(pos, script_table)
+		teleportPlayer(player, pos)
+	else
+		minetest.log("x","Congratulations!  All levels successfully completed.")
+	end
 end
 
 local function exitTouchAction(player)

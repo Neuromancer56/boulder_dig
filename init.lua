@@ -103,6 +103,8 @@ script_tables = {
 		{"fill_box", 1, 11, 1, "Y", "dirt", "default:torch", "T", 6,true},
 		{"move", "x", 1},
 		{"fill_box", 1, 11, 1, "X", "default:ladder", "air","T" , 11,true},
+		{"place_node",0,11,1,"default:dirt", true},
+		
 	}
 }
 
