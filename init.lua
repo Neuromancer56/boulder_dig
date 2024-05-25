@@ -18,6 +18,7 @@ levels = {
 	[2] = {gems_needed = 10, gem_points_regular = 20, gem_points_bonus = 50, x_start_loc= 10, y_start_loc=17 , z_start_loc = 10},
     [3] = {gems_needed = 24, gem_points_regular = 15, gem_points_bonus = 0, x_start_loc= 10, y_start_loc=17 , z_start_loc = 10},
 	[4] = {gems_needed = 24, gem_points_regular = 15, gem_points_bonus = 0, x_start_loc= 1, y_start_loc=1 , z_start_loc = 1},
+	[5] = {gems_needed = 10, gem_points_regular = 20, gem_points_bonus = 50, x_start_loc= 10, y_start_loc=2 , z_start_loc = 10},
     -- Add more levels as needed
 }
 high_score= 0
@@ -83,8 +84,25 @@ script_tables = {
 		{"move", "x", 2},
 		{"move", "y", 2},
 		{"move", "z", 2},		
-		{"fill_box", 2, 2, 2, "X", "air", "default:torch", "T", 1},
-		
+		{"fill_box", 2, 2, 2, "X", "air", "default:torch", "T", 1},		
+	},
+	--avalanche
+	{
+		{"build_level", 38, 20, 21, .5, .5,40,.0,40,.0,40,.0},
+		{"place_node",35,2,10,"boulder_dig:exit_dormant", true},
+		{"place_node",2,2,15,"boulder_dig:exit_dormant", true},
+		{"move", "x", 2},
+		{"move", "y", 1},
+		{"move", "z", 2},
+		{"fill_box", 14, 12, 17, "X", "default:cobble", "default:torch", "T", 5, true},
+		{"move", "x", 1},
+		{"move", "z", 1},		
+		{"fill_box", 12, 11, 15, "X", "air", "default:torch", "T", 6,true},
+		{"move", "x", 6},
+		{"move", "z", 7},			
+		{"fill_box", 1, 11, 1, "Y", "dirt", "default:torch", "T", 6,true},
+		{"move", "x", 1},
+		{"fill_box", 1, 11, 1, "X", "default:ladder", "air","T" , 11,true},
 	}
 }
 
@@ -105,6 +123,11 @@ exit_script_table = {
 		{"place_node",2,2,15,"boulder_dig:exit", true},
 	},
 	--amoeba 
+	{
+		{"place_node",35,2,10,"boulder_dig:exit", true},
+		{"place_node",2,2,15,"boulder_dig:exit", true},
+	},
+		--avalanche
 	{
 		{"place_node",35,2,10,"boulder_dig:exit", true},
 		{"place_node",2,2,15,"boulder_dig:exit", true},
