@@ -14,9 +14,10 @@ local function logTable(tableToLog)
 end
 levels = {
     [0] = {gems_needed = 1000, gem_points_regular = 0, gem_points_bonus = 0, x_start_loc= 0, y_start_loc=0 , z_start_loc = 0},
-	[1] = {gems_needed = 10, gem_points_regular = 20, gem_points_bonus = 50, x_start_loc= 10, y_start_loc=17 , z_start_loc = 10},
-    [2] = {gems_needed = 24, gem_points_regular = 15, gem_points_bonus = 0, x_start_loc= 10, y_start_loc=17 , z_start_loc = 10},
-	[3] = {gems_needed = 24, gem_points_regular = 15, gem_points_bonus = 0, x_start_loc= 1, y_start_loc=1 , z_start_loc = 1},
+	[1] = {gems_needed = 3, gem_points_regular = 5, gem_points_bonus = 8, x_start_loc= 5, y_start_loc=6, z_start_loc = 5},
+	[2] = {gems_needed = 10, gem_points_regular = 20, gem_points_bonus = 50, x_start_loc= 10, y_start_loc=17 , z_start_loc = 10},
+    [3] = {gems_needed = 24, gem_points_regular = 15, gem_points_bonus = 0, x_start_loc= 10, y_start_loc=17 , z_start_loc = 10},
+	[4] = {gems_needed = 24, gem_points_regular = 15, gem_points_bonus = 0, x_start_loc= 1, y_start_loc=1 , z_start_loc = 1},
     -- Add more levels as needed
 }
 high_score= 0
@@ -43,6 +44,16 @@ initializeVariables()
 --levels
 --"defaultx:mese_post_lightx" > "hero_minesx:working_mese_post_lightx"
 script_tables = {
+	--tutorial
+	{
+		{"build_level", 16, 9, 9, .05, .05,8,.02,10,.0,10,.0},
+		{"place_node",13,2,5,"boulder_dig:exit_dormant", true},
+		{"place_node",2,2,5,"boulder_dig:exit_dormant", true},
+		{"move", "x", 5},
+		{"move", "y", 6},
+		{"move", "z", 5},
+		{"fill_box", 2, 2, 2, "X", "air", "default:torch", "T", 1},
+	},
 	--level 2
 	{
 		{"build_level", 38, 20, 21, .1, .05,7,.6,7,.6,7,.6},
@@ -78,6 +89,11 @@ script_tables = {
 }
 
 exit_script_table = {
+	--tutorial
+	{
+		{"place_node",13,2,5,"boulder_dig:exit", true},
+		{"place_node",2,2,5,"boulder_dig:exit", true},
+	},
 	--level 2
 	{
 		{"place_node",35,2,10,"boulder_dig:exit", true},
