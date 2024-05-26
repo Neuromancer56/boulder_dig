@@ -89,8 +89,6 @@ script_tables = {
 	--avalanche
 	{
 		{"build_level", 38, 20, 21, .5, .5,40,.0,40,.0,40,.0},
-		{"place_node",35,2,10,"boulder_dig:exit_dormant", true},
-		{"place_node",2,2,15,"boulder_dig:exit_dormant", true},
 		{"move", "x", 2},
 		{"move", "y", 1},
 		{"move", "z", 2},
@@ -104,6 +102,9 @@ script_tables = {
 		{"move", "x", 1},
 		{"fill_box", 1, 11, 1, "X", "default:ladder", "air","T" , 11,true},
 		{"place_node",0,11,1,"default:dirt", true},
+		--{"place_node",35,2,10,"boulder_dig:exit_dormant", true},
+		{"move_to_script_start_position"},
+		{"place_node",4,2,3,"boulder_dig:exit_dormant", true},
 		
 	}
 }
@@ -131,8 +132,8 @@ exit_script_table = {
 	},
 		--avalanche
 	{
-		{"place_node",35,2,10,"boulder_dig:exit", true},
-		{"place_node",2,2,15,"boulder_dig:exit", true},
+		--{"place_node",35,2,10,"boulder_dig:exit", true},
+		{"place_node",4,2,3,"boulder_dig:exit", true},
 	}
 }
 
