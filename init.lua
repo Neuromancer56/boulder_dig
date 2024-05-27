@@ -20,6 +20,7 @@ levels = {
 	[4] = {gems_needed = 24, gem_points_regular = 15, gem_points_bonus = 0, x_start_loc= 1, y_start_loc=1 , z_start_loc = 1},
 	[5] = {gems_needed = 10, gem_points_regular = 20, gem_points_bonus = 50, x_start_loc= 10, y_start_loc=0 , z_start_loc = 10},
 	[6] = {gems_needed = 10, gem_points_regular = 20, gem_points_bonus = 50, x_start_loc= 10, y_start_loc=0 , z_start_loc = 10},
+	[7] = {gems_needed = 10, gem_points_regular = 20, gem_points_bonus = 50, x_start_loc= 10, y_start_loc=2 , z_start_loc = 10},
     -- Add more levels as needed
 }
 high_score= 0
@@ -107,7 +108,7 @@ script_tables = {
 		{"move_to_script_start_position"},
 		{"place_node",4,2,3,"boulder_dig:exit_dormant", true},		
 	},
-		--magic wall
+		--magic wall easy
 	{
 		{"build_level", 38, 20, 21, .1, 0,40,.0,40,.0,40,.0},
 		{"move", "x", 2},
@@ -127,6 +128,22 @@ script_tables = {
 		{"move_to_script_start_position"},
 		{"place_node",4,2,3,"boulder_dig:exit_dormant", true},		
 	},
+		--magic wall
+	{
+		{"build_level", 38, 20, 21, .1, 0,40,.0,40,.0,40,.0},
+		{"move", "x", 2},
+		{"move", "y", 12},
+		{"move", "z", 2},
+		{"fill_box", 14, 1, 17, "X", "boulder_dig:magic_wall", "default:torch", "T", 5, true},
+		--{"fill_box", 14, 11, 17, "X", "air", "default:torch", "T", 6,true},
+		--{"place_node",35,2,10,"boulder_dig:exit_dormant", true},
+		{"move_to_script_start_position"},
+		{"place_node",2,2,10,"boulder_dig:exit_dormant", true},	
+		{"move", "x", 10},
+		{"move", "y", 2},
+		{"move", "z", 10},
+		{"fill_box", 2, 2, 2, "X", "air", "default:torch", "T", 1},
+	},	
 }
 
 exit_script_table = {
@@ -155,12 +172,16 @@ exit_script_table = {
 		--{"place_node",35,2,10,"boulder_dig:exit", true},
 		{"place_node",4,2,3,"boulder_dig:exit", true},
 	},
-	--magic_wall
+	--magic_wall easy
 	{
 		--{"place_node",35,2,10,"boulder_dig:exit", true},
 		{"place_node",4,2,3,"boulder_dig:exit", true},
-	}
-		
+	},
+	--magic_wall
+	{
+		--{"place_node",35,2,10,"boulder_dig:exit", true},
+		{"place_node",2,2,10,"boulder_dig:exit", true},
+	},		
 }
 
 function teleportPlayer(player, pos)
