@@ -28,6 +28,9 @@ local function add_fall_damage(node, damage)
 end
 
 
+
+
+
 function default.node_sound_gem_defaults(table)
 	table = table or {}
 	table.footstep = table.footstep or
@@ -114,6 +117,61 @@ local function gemstoneTouchAction(player)
 		minetest.log("x", "Lvl:"..currentLevel.." Gem:"..levelGemsCollected.."of"..levelInfo.gems_needed.." Val:"..currentGemValue .." S:"..score.." HS:"..high_score)
 	end
 end
+
+minetest.register_node("boulder_dig:magic_wall", {
+    description = "Magic Wall",
+    tiles = {"default_diamond_block.png"},
+    is_ground_content = false,
+    walkable = true, -- Make the wall non-walkable so nodes can fall through
+    pointable = true,
+    diggable = true,
+    buildable_to = false,
+    sunlight_propagates = true,
+    paramtype = "light",
+    groups = {cracky = 3, stone = 1, not_in_creative_inventory = 1}, -- Added not_in_creative_inventory to avoid cluttering the inventory
+    sounds = default.node_sound_stone_defaults(),
+})
+
+
+-- Function to handle conversion when a node falls through the magic wall
+local function convert_node(pos, node)
+    local below_pos = {x = pos.x, y = pos.y - 1, z = pos.z}
+    local below_node = minetest.get_node(below_pos)
+	minetest.log("x","below_node"..below_node.name)
+    if below_node.name == "boulder_dig:magic_wall" then
+        local new_node_name
+
+        if node.name == "boulders:boulder" then
+            new_node_name = "boulder_dig:gemstone"
+        elseif node.name == "boulder_dig:gemstone" then
+            new_node_name = "boulders:boulder"
+        else
+            return
+        end
+
+        minetest.set_node(pos, {name = "air"})
+        local target_pos = {x = pos.x, y = pos.y - 2, z = pos.z}
+        minetest.set_node(target_pos, {name = new_node_name})
+		minetest.check_for_falling(target_pos)
+    end
+end
+
+
+-- Override the on_falling callback for boulder and gemstone to also do convert_node
+minetest.override_item("boulders:boulder", {
+		on_construct = function(pos, node)
+			convert_node(pos, minetest.get_node(pos))
+			check_for_tumbling(pos,"boulders:boulder",{"boulder_dig:gemstone","boulders:boulder"},"falling_boulder")
+		end,
+})
+
+minetest.override_item("boulder_dig:gemstone", {
+	on_construct = function(pos, node)
+		convert_node(pos, minetest.get_node(pos))
+		check_for_tumbling(pos,"boulder_dig:gemstone",{"boulder_dig:gemstone","boulders:boulder"},"sound_effect_twinkle_sparkle")
+	end,
+})
+
 
 registerNodeTouchAction("boulder_dig:gemstone", gemstoneTouchAction)
 add_fall_damage("boulder_dig:gemstone", 4)
