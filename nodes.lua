@@ -129,7 +129,44 @@ minetest.register_node("boulder_dig:magic_wall", {
 	sounds = default.node_sound_glass_defaults(),
 	--groups = {cracky = 3},
 })
+ 
+local function spawn_spark_particles(pos)
+    local radius = 1.0 -- Radius for the particle explosion
+    local particle_count = 100 -- Number of particles
+    local min_velocity = 1.0 -- Minimum velocity of particles
+    local max_velocity = 2.0 -- Maximum velocity of particles
 
+    for i = 1, particle_count do
+        local vel_x = math.random(-100, 100) / 100 * max_velocity
+        local vel_y = math.random(-100, 100) / 100 * max_velocity
+        local vel_z = math.random(-100, 100) / 100 * max_velocity
+
+        -- Ensure particles move outward from the center
+        if vel_x == 0 and vel_y == 0 and vel_z == 0 then
+            vel_x = min_velocity
+        end
+
+        minetest.add_particle({
+            pos = {
+                x = pos.x + math.random() * radius - radius / 2,
+                y = pos.y + math.random() * radius - radius / 2,
+                z = pos.z + math.random() * radius - radius / 2,
+            },
+            velocity = {
+                x = vel_x,
+                y = vel_y,
+                z = vel_z,
+            },
+            acceleration = {x = 0, y = 0, z = 0},
+            expirationtime = 2.0,
+            size = 2.0,
+            collisiondetection = false,
+            vertical = false,
+            texture = "default_blueberry_overlay.png",  		   
+            glow = 14
+        })
+    end
+end
 
 -- Function to handle conversion when a node falls through the magic wall
 local function convert_node(pos, node)
@@ -146,8 +183,9 @@ local function convert_node(pos, node)
         else
             return
         end
-
         minetest.set_node(pos, {name = "air"})
+		minetest.sound_play("transform", {pos = pos, gain = 0.5, max_hear_distance = 10})
+		spawn_spark_particles(pos)		
         local target_pos = {x = pos.x, y = pos.y - 2, z = pos.z}
         minetest.set_node(target_pos, {name = new_node_name})
 		minetest.check_for_falling(target_pos)
