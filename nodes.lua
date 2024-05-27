@@ -120,16 +120,14 @@ end
 
 minetest.register_node("boulder_dig:magic_wall", {
     description = "Magic Wall",
-    tiles = {"default_diamond_block.png"},
-    is_ground_content = false,
-    walkable = true, -- Make the wall non-walkable so nodes can fall through
-    pointable = true,
-    diggable = true,
-    buildable_to = false,
-    sunlight_propagates = true,
-    paramtype = "light",
-    groups = {cracky = 3, stone = 1, not_in_creative_inventory = 1}, -- Added not_in_creative_inventory to avoid cluttering the inventory
-    sounds = default.node_sound_stone_defaults(),
+	drawtype = "glasslike_framed_optional",
+	tiles = {"default_obsidian_glass.png", "default_obsidian_glass_detail.png"},
+	use_texture_alpha = "clip", -- only needed for stairs API
+	paramtype = "light",
+	is_ground_content = false,
+	sunlight_propagates = true,
+	sounds = default.node_sound_glass_defaults(),
+	--groups = {cracky = 3},
 })
 
 
@@ -137,7 +135,7 @@ minetest.register_node("boulder_dig:magic_wall", {
 local function convert_node(pos, node)
     local below_pos = {x = pos.x, y = pos.y - 1, z = pos.z}
     local below_node = minetest.get_node(below_pos)
-	minetest.log("x","below_node"..below_node.name)
+	--minetest.log("x","below_node"..below_node.name)
     if below_node.name == "boulder_dig:magic_wall" then
         local new_node_name
 
