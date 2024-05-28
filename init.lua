@@ -139,9 +139,10 @@ script_tables = {
 		--{"place_node",35,2,10,"boulder_dig:exit_dormant", true},
 		{"move_to_script_start_position"},
 		{"place_node",2,2,10,"boulder_dig:exit_dormant", true},	
-		{"move", "x", 10},
+		--{"move_to_script_start_position"},
+		{"move", "x", 9},
 		{"move", "y", 2},
-		{"move", "z", 10},
+		{"move", "z", 9},
 		{"fill_box", 2, 2, 2, "X", "air", "default:torch", "T", 1},
 	},	
 }
