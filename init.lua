@@ -85,7 +85,7 @@ script_tables = {
 		{"place_node",35,2,10,"boulder_dig:exit_dormant", true},
 		{"place_node",2,2,15,"boulder_dig:exit_dormant", true},
 		{"place_node",17,1,2,"boulder_dig:amoeba", true},
-		{"place_node",17,2,9,"boulder_dig:butterfly", true},
+		{"place_node",17,1,9,"boulder_dig:butterfly", true},
 		{"move", "x", 2},
 		{"move", "y", 2},
 		{"move", "z", 2},		
