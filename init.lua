@@ -62,6 +62,7 @@ script_tables = {
 		{"build_level", 38, 20, 21, .1, .05,7,.6,7,.6,7,.6},
 		{"place_node",35,2,10,"boulder_dig:exit_dormant", true},
 		{"place_node",2,2,15,"boulder_dig:exit_dormant", true},
+		{"place_node",17,9,15,"boulder_dig:butterfly", true},
 		{"move", "x", 10},
 		{"move", "y", 17},
 		{"move", "z", 10},
@@ -72,6 +73,7 @@ script_tables = {
 		{"build_level", 38, 21, 21, .18, .09,2,.07,2,.07,2,.07},
 		{"place_node",35,2,10,"boulder_dig:exit_dormant", true},
 		{"place_node",2,2,15,"boulder_dig:exit_dormant", true},
+		{"place_node",17,9,9,"boulder_dig:butterfly", true},
 		{"move", "x", 10},
 		{"move", "y", 17},
 		{"move", "z", 10},
@@ -83,6 +85,7 @@ script_tables = {
 		{"place_node",35,2,10,"boulder_dig:exit_dormant", true},
 		{"place_node",2,2,15,"boulder_dig:exit_dormant", true},
 		{"place_node",17,1,2,"boulder_dig:amoeba", true},
+		{"place_node",17,2,9,"boulder_dig:butterfly", true},
 		{"move", "x", 2},
 		{"move", "y", 2},
 		{"move", "z", 2},		
@@ -107,6 +110,7 @@ script_tables = {
 		--{"place_node",35,2,10,"boulder_dig:exit_dormant", true},
 		{"move_to_script_start_position"},
 		{"place_node",4,2,3,"boulder_dig:exit_dormant", true},		
+		{"place_node",17,9,9,"boulder_dig:butterfly", true},
 	},
 		--magic wall easy
 	{
@@ -127,6 +131,7 @@ script_tables = {
 		--{"place_node",35,2,10,"boulder_dig:exit_dormant", true},
 		{"move_to_script_start_position"},
 		{"place_node",4,2,3,"boulder_dig:exit_dormant", true},		
+		{"place_node",17,9,9,"boulder_dig:butterfly", true},
 	},
 		--magic wall
 	{
@@ -144,6 +149,7 @@ script_tables = {
 		{"move", "y", 2},
 		{"move", "z", 9},
 		{"fill_box", 2, 2, 2, "X", "air", "default:torch", "T", 1},
+		{"place_node",17,9,9,"boulder_dig:butterfly", true},
 	},	
 }
 
@@ -198,6 +204,7 @@ dofile(minetest.get_modpath("boulder_dig").."/nodes.lua")
 dofile(minetest.get_modpath("boulder_dig").."/chat_commands.lua")
 dofile(minetest.get_modpath("boulder_dig").."/levels.lua")
 dofile(minetest.get_modpath("boulder_dig").."/amoeba.lua")
+dofile(minetest.get_modpath("boulder_dig").."/butterfly.lua")
 
 
 minetest.register_on_dieplayer(function(player)
