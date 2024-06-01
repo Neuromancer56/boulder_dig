@@ -7,7 +7,7 @@ minetest.register_node("boulder_dig:butterfly", {
     wield_image = "default_coral_orange.png",
     paramtype = "light",
     sunlight_propagates = true,
-    walkable = false,
+    walkable = true,
     groups = {flammable = 2},
     on_construct = function(pos)
         minetest.get_node_timer(pos):start(0.4)

@@ -169,10 +169,13 @@ local function spawn_spark_particles(pos)
 end
 
 -- Function to handle conversion when a node falls through the magic wall
-local function convert_node(pos, node)
+local function handle_construct(pos, node)
     local below_pos = {x = pos.x, y = pos.y - 1, z = pos.z}
     local below_node = minetest.get_node(below_pos)
 	--minetest.log("x","below_node"..below_node.name)
+	if below_node.name == "boulder_dig:butterfly" then
+		butterfly_died(below_pos)
+	end
     if below_node.name == "boulder_dig:magic_wall" then
         local new_node_name
 
@@ -196,14 +199,14 @@ end
 -- Override the on_falling callback for boulder and gemstone to also do convert_node
 minetest.override_item("boulders:boulder", {
 		on_construct = function(pos, node)
-			convert_node(pos, minetest.get_node(pos))
+			handle_construct(pos, minetest.get_node(pos))
 			check_for_tumbling(pos,"boulders:boulder",{"boulder_dig:gemstone","boulders:boulder"},"falling_boulder")
 		end,
 })
 
 minetest.override_item("boulder_dig:gemstone", {
 	on_construct = function(pos, node)
-		convert_node(pos, minetest.get_node(pos))
+		handle_construct(pos, minetest.get_node(pos))
 		check_for_tumbling(pos,"boulder_dig:gemstone",{"boulder_dig:gemstone","boulders:boulder"},"sound_effect_twinkle_sparkle")
 	end,
 })
