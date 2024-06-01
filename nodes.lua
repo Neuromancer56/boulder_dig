@@ -129,6 +129,19 @@ minetest.register_node("boulder_dig:magic_wall", {
 	sounds = default.node_sound_glass_defaults(),
 	--groups = {cracky = 3},
 })
+
+
+minetest.register_node("boulder_dig:magic_wall_expended", {
+    description = "Magic Wall Expended",
+	drawtype = "glasslike_framed_optional",
+	tiles = {"default_glass.png", "default_glass_detail.png"},
+	use_texture_alpha = "clip", -- only needed for stairs API
+	paramtype = "light",
+	is_ground_content = false,
+	sunlight_propagates = true,
+	sounds = default.node_sound_glass_defaults(),
+	--groups = {cracky = 3},
+})
  
 local function spawn_spark_particles(pos)
     local radius = 1.0 -- Radius for the particle explosion
@@ -168,6 +181,35 @@ local function spawn_spark_particles(pos)
     end
 end
 
+
+-- Function to replace nodes in a 3x1x3 box with magic_wall_expended 
+function set_magic_wall_to_expended(pos)
+    -- Loop through the 3x1x3 box surrounding the given position
+    local node_name = "boulder_dig:magic_wall_expended"
+	for x = -1, 1, 1 do
+		for z = -1, 1, 1 do
+			-- Calculate the current position in the box
+			local current_pos = {x = pos.x + x, y = pos.y, z = pos.z + z}
+			
+			-- Get the current node at this position
+			local current_node = minetest.get_node(current_pos)
+			--minetest.log("x", "currentNodeName"..current_node.name)
+			-- Replace only if "boulder_dig:magic_wall"
+			if current_node.name ~= "boulder_dig:magic_wall" then
+				goto continue
+			end
+			
+			-- Set the node at the current position
+			minetest.set_node(current_pos, {name = node_name})
+			
+			::continue::
+		end
+end
+end
+
+
+
+
 -- Function to handle conversion when a node falls through the magic wall
 local function handle_construct(pos, node)
     local below_pos = {x = pos.x, y = pos.y - 1, z = pos.z}
@@ -177,6 +219,7 @@ local function handle_construct(pos, node)
 		butterfly_died(below_pos)
 	end
     if below_node.name == "boulder_dig:magic_wall" then
+		
         local new_node_name
 
         if node.name == "boulders:boulder" then
@@ -192,6 +235,7 @@ local function handle_construct(pos, node)
         local target_pos = {x = pos.x, y = pos.y - 2, z = pos.z}
         minetest.set_node(target_pos, {name = new_node_name})
 		minetest.check_for_falling(target_pos)
+		set_magic_wall_to_expended(below_pos)
     end
 end
 
