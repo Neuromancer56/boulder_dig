@@ -21,6 +21,7 @@ levels = {
 	[5] = {gems_needed = 10, gem_points_regular = 20, gem_points_bonus = 50, x_start_loc= 10, y_start_loc=0 , z_start_loc = 10},
 	[6] = {gems_needed = 10, gem_points_regular = 20, gem_points_bonus = 50, x_start_loc= 10, y_start_loc=0 , z_start_loc = 10},
 	[7] = {gems_needed = 10, gem_points_regular = 20, gem_points_bonus = 50, x_start_loc= 10, y_start_loc=2 , z_start_loc = 10},
+	--[8] = {gems_needed = 1, gem_points_regular = 20, gem_points_bonus = 20, x_start_loc= 2, y_start_loc=2 , z_start_loc = 2},
     -- Add more levels as needed
 }
 high_score= 0
@@ -42,6 +43,14 @@ end
 
 initializeVariables()
 
+-- Ensure modname is defined
+local modname = minetest.get_current_modname()
+-- Get the schematic path
+local modpath = minetest.get_modpath(modname)
+if not modpath then
+    error("Mod path for " .. modname .. " not found")
+end
+local schematic_path1 = modpath .. "\\schematics\\sakura_tree_2.mts"
 
 --https://www.youtube.com/watch?v=bpzN0fagzi8&t=42s
 --levels
@@ -151,6 +160,10 @@ script_tables = {
 		{"fill_box", 2, 2, 2, "X", "air", "default:torch", "T", 1},
 		{"place_node",17,9,9,"boulder_dig:butterfly", true},
 	},	
+	--[[
+	{
+		{"place_schematic", schematic_path1},		 
+	},]]
 }
 
 exit_script_table = {
@@ -188,7 +201,14 @@ exit_script_table = {
 	{
 		--{"place_node",35,2,10,"boulder_dig:exit", true},
 		{"place_node",2,2,10,"boulder_dig:exit", true},
-	},		
+	},	
+	--[[
+	--schematic1
+	{
+		--{"place_node",35,2,10,"boulder_dig:exit", true},
+		{"place_node",2,2,10,"boulder_dig:exit", true},
+	},	]]
+	
 }
 
 function teleportPlayer(player, pos)
