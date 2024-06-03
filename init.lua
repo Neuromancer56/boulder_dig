@@ -162,7 +162,7 @@ script_tables = {
 	},	
 	--[[
 	{
-		{"place_schematic", schematic_path1},		 
+		{"build_schematic", schematic_path1},		 
 	},]]
 }
 
