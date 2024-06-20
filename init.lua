@@ -21,7 +21,7 @@ levels = {
 	[5] = {gems_needed = 10, gem_points_regular = 20, gem_points_bonus = 50, x_start_loc= 10, y_start_loc=0 , z_start_loc = 10},
 	[6] = {gems_needed = 10, gem_points_regular = 20, gem_points_bonus = 50, x_start_loc= 10, y_start_loc=0 , z_start_loc = 10},
 	[7] = {gems_needed = 10, gem_points_regular = 20, gem_points_bonus = 50, x_start_loc= 10, y_start_loc=2 , z_start_loc = 10},
-	--[8] = {gems_needed = 1, gem_points_regular = 20, gem_points_bonus = 20, x_start_loc= 2, y_start_loc=2 , z_start_loc = 2},
+	[8] = {gems_needed = 1, gem_points_regular = 20, gem_points_bonus = 20, x_start_loc= 2, y_start_loc=2 , z_start_loc = 2},
     -- Add more levels as needed
 }
 high_score= 0
@@ -50,7 +50,8 @@ local modpath = minetest.get_modpath(modname)
 if not modpath then
     error("Mod path for " .. modname .. " not found")
 end
-local schematic_path1 = modpath .. "\\schematics\\sakura_tree_2.mts"
+--local schematic_path1 = modpath .. "\\schematics\\sakura_tree_2.mts"
+local schematic_path1 = modpath .. "\\schematics\\bomb_butterfly.lua"
 
 --https://www.youtube.com/watch?v=bpzN0fagzi8&t=42s
 --levels
@@ -160,6 +161,9 @@ script_tables = {
 		{"fill_box", 2, 2, 2, "X", "air", "default:torch", "T", 1},
 		{"place_node",17,9,9,"boulder_dig:butterfly", true},
 	},	
+	{
+		{"build_ascii_schematic", schematic_path1},		 
+	},
 	--[[
 	{
 		{"build_schematic", schematic_path1},		 
@@ -225,6 +229,7 @@ dofile(minetest.get_modpath("boulder_dig").."/chat_commands.lua")
 dofile(minetest.get_modpath("boulder_dig").."/levels.lua")
 dofile(minetest.get_modpath("boulder_dig").."/amoeba.lua")
 dofile(minetest.get_modpath("boulder_dig").."/butterfly.lua")
+--dofile(minetest.get_modpath("boulder_dig").."/beech_bush_1.lua")
 
 
 minetest.register_on_dieplayer(function(player)
