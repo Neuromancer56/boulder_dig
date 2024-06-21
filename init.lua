@@ -57,7 +57,7 @@ local schematic_path1 = modpath .. "\\schematics\\bomb_butterfly.lua"
 --levels
 --"defaultx:mese_post_lightx" > "hero_minesx:working_mese_post_lightx"
 script_tables = {
-	--tutorial
+	--lvl 1: tutorial
 	{
 		{"build_level", 16, 9, 9, .05, .05,8,.02,10,.0,10,.0},
 		{"place_node",13,2,5,"boulder_dig:exit_dormant", true},
@@ -89,7 +89,7 @@ script_tables = {
 		{"move", "z", 10},
 		{"fill_box", 2, 2, 2, "X", "air", "default:torch", "T", 1},
 	},
-	--amoeba 
+	--lvl 4: amoeba 
 	{
 		{"build_level", 38, 4, 21, .18, .00,10,.00,10,.00,10,.00},
 		{"place_node",35,2,10,"boulder_dig:exit_dormant", true},
@@ -101,7 +101,7 @@ script_tables = {
 		{"move", "z", 2},		
 		{"fill_box", 2, 2, 2, "X", "air", "default:torch", "T", 1},		
 	},
-	--avalanche
+	--lvl 5: avalanche
 	{
 		{"build_level", 38, 20, 21, .5, .5,40,.0,40,.0,40,.0},
 		{"move", "x", 2},
@@ -122,7 +122,7 @@ script_tables = {
 		{"place_node",4,2,3,"boulder_dig:exit_dormant", true},		
 		{"place_node",17,9,9,"boulder_dig:butterfly", true},
 	},
-		--magic wall easy
+		--lvl 6: magic wall easy
 	{
 		{"build_level", 38, 20, 21, .1, 0,40,.0,40,.0,40,.0},
 		{"move", "x", 2},
@@ -143,7 +143,7 @@ script_tables = {
 		{"place_node",4,2,3,"boulder_dig:exit_dormant", true},		
 		{"place_node",17,9,9,"boulder_dig:butterfly", true},
 	},
-		--magic wall
+		--lvl 7: magic wall
 	{
 		{"build_level", 38, 20, 21, .1, 0,40,.0,40,.0,40,.0},
 		{"move", "x", 2},
@@ -161,6 +161,7 @@ script_tables = {
 		{"fill_box", 2, 2, 2, "X", "air", "default:torch", "T", 1},
 		{"place_node",17,9,9,"boulder_dig:butterfly", true},
 	},	
+		--lvl 8: bomb butterfly
 	{
 		{"build_ascii_schematic", schematic_path1},	
 		{"place_node",2,1,2,"boulder_dig:butterfly", true},
@@ -185,7 +186,7 @@ script_tables = {
 }
 
 exit_script_table = {
-	--tutorial
+	--lvl 1: tutorial
 	{
 		{"place_node",13,2,5,"boulder_dig:exit", true},
 		{"place_node",2,2,5,"boulder_dig:exit", true},
@@ -200,27 +201,27 @@ exit_script_table = {
 		{"place_node",35,2,10,"boulder_dig:exit", true},
 		{"place_node",2,2,15,"boulder_dig:exit", true},
 	},
-	--amoeba 
+	--lvl 4: amoeba 
 	{
 		{"place_node",35,2,10,"boulder_dig:exit", true},
 		{"place_node",2,2,15,"boulder_dig:exit", true},
 	},
-	--avalanche
+	--lvl 5: avalanche
 	{
 		--{"place_node",35,2,10,"boulder_dig:exit", true},
 		{"place_node",4,2,3,"boulder_dig:exit", true},
 	},
-	--magic_wall easy
+	--lvl 6: magic_wall easy
 	{
 		--{"place_node",35,2,10,"boulder_dig:exit", true},
 		{"place_node",4,2,3,"boulder_dig:exit", true},
 	},
-	--magic_wall
+	--lvl 7: magic_wall
 	{
 		--{"place_node",35,2,10,"boulder_dig:exit", true},
 		{"place_node",2,2,10,"boulder_dig:exit", true},
 	},
-	--bomb_butterfly
+	--lvl 8: bomb_butterfly
 	{
 		--{"place_node",35,2,10,"boulder_dig:exit", true},
 		{"place_node",1,1,3,"boulder_dig:exit", true},
