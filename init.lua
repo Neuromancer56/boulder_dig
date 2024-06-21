@@ -21,7 +21,7 @@ levels = {
 	[5] = {gems_needed = 10, gem_points_regular = 20, gem_points_bonus = 50, x_start_loc= 10, y_start_loc=0 , z_start_loc = 10},
 	[6] = {gems_needed = 10, gem_points_regular = 20, gem_points_bonus = 50, x_start_loc= 10, y_start_loc=0 , z_start_loc = 10},
 	[7] = {gems_needed = 10, gem_points_regular = 20, gem_points_bonus = 50, x_start_loc= 10, y_start_loc=2 , z_start_loc = 10},
-	[8] = {gems_needed = 1, gem_points_regular = 20, gem_points_bonus = 20, x_start_loc= 2, y_start_loc=2 , z_start_loc = 2},
+	[8] = {gems_needed = 5, gem_points_regular = 10, gem_points_bonus = 20, x_start_loc= 2, y_start_loc=4 , z_start_loc = 3},
     -- Add more levels as needed
 }
 high_score= 0
@@ -162,7 +162,21 @@ script_tables = {
 		{"place_node",17,9,9,"boulder_dig:butterfly", true},
 	},	
 	{
-		{"build_ascii_schematic", schematic_path1},		 
+		{"build_ascii_schematic", schematic_path1},	
+		{"place_node",2,1,2,"boulder_dig:butterfly", true},
+		{"place_node",4,1,2,"boulder_dig:butterfly", true},
+		{"place_node",6,1,2,"boulder_dig:butterfly", true},
+		{"place_node",8,1,2,"boulder_dig:butterfly", true},
+		{"place_node",10,1,2,"boulder_dig:butterfly", true},
+		{"place_node",12,1,2,"boulder_dig:butterfly", true},
+		{"place_node",14,1,2,"boulder_dig:butterfly", true},
+		{"place_node",16,1,2,"boulder_dig:butterfly", true},
+		{"place_node",18,1,2,"boulder_dig:butterfly", true},
+		{"place_node",20,1,2,"boulder_dig:butterfly", true},
+		{"place_node",22,1,2,"boulder_dig:butterfly", true},
+		{"place_node",24,1,2,"boulder_dig:butterfly", true},
+		{"place_node",26,1,2,"boulder_dig:butterfly", true},
+		{"place_node",28,1,2,"boulder_dig:butterfly", true},		
 	},
 	--[[
 	{
@@ -205,6 +219,11 @@ exit_script_table = {
 	{
 		--{"place_node",35,2,10,"boulder_dig:exit", true},
 		{"place_node",2,2,10,"boulder_dig:exit", true},
+	},
+	--bomb_butterfly
+	{
+		--{"place_node",35,2,10,"boulder_dig:exit", true},
+		{"place_node",1,1,3,"boulder_dig:exit", true},
 	},	
 	--[[
 	--schematic1
