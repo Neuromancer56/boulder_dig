@@ -164,20 +164,36 @@ script_tables = {
 		--lvl 8: bomb butterfly
 	{
 		{"build_ascii_schematic", schematic_path1},	
+		--[[
+		{"place_node",2,1,2,"boulder_dig:firefly", true},
+		{"place_node",4,1,2,"boulder_dig:firefly", true},
+		{"place_node",6,1,2,"boulder_dig:firefly", true},
+		{"place_node",8,1,2,"boulder_dig:firefly", true},
+		{"place_node",10,1,2,"boulder_dig:firefly", true},
+		{"place_node",12,1,2,"boulder_dig:firefly", true},
+		{"place_node",14,1,2,"boulder_dig:firefly", true},
+		{"place_node",16,1,2,"boulder_dig:firefly_right", true},
+		{"place_node",18,1,2,"boulder_dig:firefly_right", true},
+		{"place_node",20,1,2,"boulder_dig:firefly_right", true},
+		{"place_node",22,1,2,"boulder_dig:firefly_right", true},
+		{"place_node",24,1,2,"boulder_dig:firefly_right", true},
+		{"place_node",26,1,2,"boulder_dig:firefly_right", true},
+		{"place_node",28,1,2,"boulder_dig:firefly_right", true},	
+		]]
 		{"place_node",2,1,2,"boulder_dig:butterfly", true},
-		{"place_node",4,1,2,"boulder_dig:butterfly", true},
+		{"place_node",4,1,2,"boulder_dig:butterfly_right", true},
 		{"place_node",6,1,2,"boulder_dig:butterfly", true},
-		{"place_node",8,1,2,"boulder_dig:butterfly", true},
+		{"place_node",8,1,2,"boulder_dig:butterfly_right", true},
 		{"place_node",10,1,2,"boulder_dig:butterfly", true},
-		{"place_node",12,1,2,"boulder_dig:butterfly", true},
+		{"place_node",12,1,2,"boulder_dig:butterfly_right", true},
 		{"place_node",14,1,2,"boulder_dig:butterfly", true},
-		{"place_node",16,1,2,"boulder_dig:butterfly", true},
+		{"place_node",16,1,2,"boulder_dig:butterfly_right", true},
 		{"place_node",18,1,2,"boulder_dig:butterfly", true},
-		{"place_node",20,1,2,"boulder_dig:butterfly", true},
+		{"place_node",20,1,2,"boulder_dig:butterfly_right", true},
 		{"place_node",22,1,2,"boulder_dig:butterfly", true},
-		{"place_node",24,1,2,"boulder_dig:butterfly", true},
+		{"place_node",24,1,2,"boulder_dig:butterfly_right", true},
 		{"place_node",26,1,2,"boulder_dig:butterfly", true},
-		{"place_node",28,1,2,"boulder_dig:butterfly", true},		
+		{"place_node",28,1,2,"boulder_dig:butterfly_right", true},		
 	},
 	--[[
 	{
@@ -249,7 +265,7 @@ dofile(minetest.get_modpath("boulder_dig").."/chat_commands.lua")
 dofile(minetest.get_modpath("boulder_dig").."/levels.lua")
 dofile(minetest.get_modpath("boulder_dig").."/amoeba.lua")
 dofile(minetest.get_modpath("boulder_dig").."/butterfly.lua")
---dofile(minetest.get_modpath("boulder_dig").."/beech_bush_1.lua")
+dofile(minetest.get_modpath("boulder_dig").."/firefly.lua")
 
 
 minetest.register_on_dieplayer(function(player)

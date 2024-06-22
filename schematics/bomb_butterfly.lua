@@ -7,10 +7,10 @@ return {
 		["X"] = {name = "boulder_dig:exit_dormant"},
 		--["H"] = {name = "HIDDENOUTBOX"},
 		["W"] = {name = "default:steelblock"},
-		--["Q"] = {name = "FIREFLYl"},
-		--["o"] = {name = "FIREFLYu"},
-		--["O"] = {name = "FIREFLYr"},
-		--["q"] = {name = "FIREFLYd"},
+		["Q"] = {name = "boulder_dig:firefly"},  --left
+		["o"] = {name = "boulder_dig:firefly_right"},  --up
+		["O"] = {name = "boulder_dig:firefly_right"},  --right
+		["q"] = {name = "boulder_dig:firefly_right"},   --down
 		["r"] = {name = "boulders:boulder"},
 		--["rf"] = {name = "BOULDERf"},
 		["d"] = {name = "boulder_dig:gemstone"},
@@ -19,11 +19,10 @@ return {
 		--["x"] = {name = "HEXPANDINGWALL"},
 		--["v"] = {name = "VEXPANDINGWALL"},
 		--["V"] = {name = "EXPANDINGWALL"},	
-		--[" "] = {name = "air"},
-		--["c"] = {name = "BUTTERFLYd"},
-		["C"] = {name = "boulder_dig:butterfly"},
-		--["b"] = {name = "BUTTERFLYu"},
-		--["B"] = {name = "BUTTERFLYr"},
+		["c"] = {name = "boulder_dig:butterfly_right"},  --down
+		["C"] = {name = "boulder_dig:butterfly"},    --left
+		["b"] = {name = "boulder_dig:butterfly_right"},  --up
+		["B"] = {name = "boulder_dig:butterfly_right"},   --right
 		["a"] = {name = "boulder_dig:amoeba"},
 		--["s"] = {name = "SLIME"},	
 		["t"] = {name = "xpanes:bar_flat"},

@@ -1,7 +1,7 @@
--- Register the butterfly node
-minetest.register_node("boulder_dig:butterfly", {
-    description = "Butterfly",
-    drawtype = "plantlike",
+-- Register the firefly node
+minetest.register_node("boulder_dig:firefly", {
+    description = "Firefly",
+    drawtype = "normal",
     tiles = {"default_coral_orange.png"},
     inventory_image = "default_coral_orange.png",
     wield_image = "default_coral_orange.png",
@@ -46,28 +46,28 @@ minetest.register_node("boulder_dig:butterfly", {
 
 		local amoeba = "boulder_dig:amoeba"
 		if minetest.get_node(left_pos).name == amoeba or minetest.get_node(right_pos).name == amoeba or minetest.get_node(forward_pos).name == amoeba or minetest.get_node(back_pos).name == amoeba then
-			butterfly_died(pos)
+			firefly_died(pos)
 		end
 		
         -- Check and move   Priority: Left>forward>right> backwards
         if minetest.get_node(left_pos).name == air_node then
             direction = (direction - 1) % 4
             minetest.set_node(pos, {name = air_node})
-            minetest.set_node(left_pos, {name = "boulder_dig:butterfly"})
+            minetest.set_node(left_pos, {name = "boulder_dig:firefly"})
             minetest.get_meta(left_pos):set_int("direction", direction)
         elseif minetest.get_node(forward_pos).name == air_node then
             minetest.set_node(pos, {name = air_node})
-            minetest.set_node(forward_pos, {name = "boulder_dig:butterfly"})
+            minetest.set_node(forward_pos, {name = "boulder_dig:firefly"})
             minetest.get_meta(forward_pos):set_int("direction", direction)
         elseif minetest.get_node(right_pos).name == air_node then
             direction = (direction + 1) % 4
             minetest.set_node(pos, {name = air_node})
-            minetest.set_node(right_pos, {name = "boulder_dig:butterfly"})
+            minetest.set_node(right_pos, {name = "boulder_dig:firefly"})
             minetest.get_meta(right_pos):set_int("direction", direction)
         elseif minetest.get_node(back_pos).name == air_node then
             direction = (direction + 2) % 4
             minetest.set_node(pos, {name = air_node})
-            minetest.set_node(back_pos, {name = "boulder_dig:butterfly"})
+            minetest.set_node(back_pos, {name = "boulder_dig:firefly"})
             minetest.get_meta(back_pos):set_int("direction", direction)
         else
             minetest.get_node_timer(pos):start(0.4)
@@ -78,10 +78,10 @@ minetest.register_node("boulder_dig:butterfly", {
 })
 
 
--- Register the butterfly node
-minetest.register_node("boulder_dig:butterfly_right", {
-    description = "Butterfly Right",
-    drawtype = "plantlike",
+-- Register the firefly node
+minetest.register_node("boulder_dig:firefly_right", {
+    description = "Firefly Right",
+    drawtype = "normal",
     tiles = {"default_coral_orange.png^[colorize:yellow:128"},
     inventory_image = "default_coral_orange.png^[colorize:yellow:128",
     wield_image = "default_coral_orange.png^[colorize:yellow:128",
@@ -126,28 +126,28 @@ minetest.register_node("boulder_dig:butterfly_right", {
 
 		local amoeba = "boulder_dig:amoeba"
 		if minetest.get_node(left_pos).name == amoeba or minetest.get_node(right_pos).name == amoeba or minetest.get_node(forward_pos).name == amoeba or minetest.get_node(back_pos).name == amoeba then
-			butterfly_died(pos)
+			firefly_died(pos)
 		end
 		
 -- Check and move  Priority Right > forward > Left > reverse direction
         if minetest.get_node(right_pos).name == air_node then
             direction = (direction + 1) % 4
             minetest.set_node(pos, {name = air_node})
-            minetest.set_node(right_pos, {name = "boulder_dig:butterfly_right"})
+            minetest.set_node(right_pos, {name = "boulder_dig:firefly_right"})
             minetest.get_meta(right_pos):set_int("direction", direction)
         elseif minetest.get_node(forward_pos).name == air_node then
             minetest.set_node(pos, {name = air_node})
-            minetest.set_node(forward_pos, {name = "boulder_dig:butterfly_right"})
+            minetest.set_node(forward_pos, {name = "boulder_dig:firefly_right"})
             minetest.get_meta(forward_pos):set_int("direction", direction)
         elseif minetest.get_node(left_pos).name == air_node then
             direction = (direction - 1) % 4
             minetest.set_node(pos, {name = air_node})
-            minetest.set_node(left_pos, {name = "boulder_dig:butterfly_right"})
+            minetest.set_node(left_pos, {name = "boulder_dig:firefly_right"})
             minetest.get_meta(left_pos):set_int("direction", direction)
         elseif minetest.get_node(back_pos).name == air_node then
             direction = (direction + 2) % 4
             minetest.set_node(pos, {name = air_node})
-            minetest.set_node(back_pos, {name = "boulder_dig:butterfly_right"})
+            minetest.set_node(back_pos, {name = "boulder_dig:firefly_right"})
             minetest.get_meta(back_pos):set_int("direction", direction)
         else
             minetest.get_node_timer(pos):start(0.4)
@@ -158,80 +158,56 @@ minetest.register_node("boulder_dig:butterfly_right", {
 })
 
 
--- Register the butterfly egg for creative mode
-minetest.register_craftitem("boulder_dig:butterfly_egg", {
-    description = "Butterfly Egg",
-    inventory_image = "butterfly_egg.png",
+-- Register the firefly egg for creative mode
+minetest.register_craftitem("boulder_dig:firefly_egg", {
+    description = "firefly Egg",
+    inventory_image = "firefly_egg.png",
     on_place = function(itemstack, placer, pointed_thing)
         if pointed_thing.type ~= "node" then
             return itemstack
         end
         local pos = pointed_thing.above
-        minetest.set_node(pos, {name = "boulder_dig:butterfly"})
+        minetest.set_node(pos, {name = "boulder_dig:firefly"})
         minetest.get_meta(pos):set_int("direction", math.random(0, 3))
         itemstack:take_item()
         return itemstack
     end,
 })
-local function butterflyTouchAction(player)
-    player:set_hp(player:get_hp() - 1, "butterfly")
+local function fireflyTouchAction(player)
+    player:set_hp(player:get_hp() - 1, "firefly")
 end
-registerNodeTouchAction("boulder_dig:butterfly", butterflyTouchAction)
+registerNodeTouchAction("boulder_dig:firefly", fireflyTouchAction)
 
 
-function butterfly_died(pos)
+function firefly_died(pos)
 	local sound = "tnt_explode"
 	minetest.sound_play(sound, {pos = pos, gain = .5,
 			max_hear_distance = 30}, true)
-	replace_nodes_with_air_and_gemstone(pos)
+	replace_nodes_with_air(pos)
 end
 
--- Function to replace nodes in a 3x3x3 cube with air, except for the center of each face
-function replace_nodes_with_air_and_gemstone(pos)
-    -- Define the relative positions for the center of each face of the cube
-    local face_centers = {
-        {x = 0, y = 1, z = 0},  -- top face center
-        {x = 0, y = -1, z = 0}, -- bottom face center
-        {x = 1, y = 0, z = 0},  -- right face center
-        {x = -1, y = 0, z = 0}, -- left face center
-        {x = 0, y = 0, z = 1},  -- front face center
-        {x = 0, y = 0, z = -1}, -- back face center
-    }
-
+-- Function to replace nodes in a 3x3x3 cube with air
+function replace_nodes_with_air(pos)
     -- Loop through the 3x3x3 cube surrounding the given position
-    for x = -1, 1, 1 do
-        for y = -1, 1, 1 do
-            for z = -1, 1, 1 do
+    for x = -1, 1 do
+        for y = -1, 1 do
+            for z = -1, 1 do
                 -- Calculate the current position in the cube
                 local current_pos = {x = pos.x + x, y = pos.y + y, z = pos.z + z}
                 
                 -- Get the current node at this position
                 local current_node = minetest.get_node(current_pos)
                 
-                -- Skip replacement if the current node is "xpanes:bar_flat"
-                if current_node.name == "xpanes:bar_flat" or current_node.name == "default:steelblock" then
-                    goto continue
+                -- Skip replacement if the current node is "xpanes:bar_flat" or "default:steelblock"
+                if current_node.name ~= "xpanes:bar_flat" and current_node.name ~= "default:steelblock" then
+                    -- Set the node at the current position to air
+                    minetest.set_node(current_pos, {name = "air"})
                 end
-                
-                -- By default, set the node to air
-                local node_name = "air"
-                
-                -- Check if the current position is one of the face centers
-                for _, face_center in ipairs(face_centers) do
-                    if x == face_center.x and y == face_center.y and z == face_center.z then
-                        node_name = "boulder_dig:gemstone"
-                        break
-                    end
-                end
-
-                -- Set the node at the current position
-                minetest.set_node(current_pos, {name = node_name})
-                
-                ::continue::
             end
         end
     end
 end
+
 
 
 
