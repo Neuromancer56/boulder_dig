@@ -215,8 +215,11 @@ local function handle_construct(pos, node)
     local below_pos = {x = pos.x, y = pos.y - 1, z = pos.z}
     local below_node = minetest.get_node(below_pos)
 	--minetest.log("x","below_node"..below_node.name)
-	if below_node.name == "boulder_dig:butterfly" then
+	if below_node.name == "boulder_dig:butterfly" or below_node.name == "boulder_dig:butterfly_right" then
 		butterfly_died(below_pos)
+	end
+	if below_node.name == "boulder_dig:firefly" or below_node.name == "boulder_dig:firefly_right" then
+		firefly_died(below_pos)
 	end
     if below_node.name == "boulder_dig:magic_wall" then
 		
