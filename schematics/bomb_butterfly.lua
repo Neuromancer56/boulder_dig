@@ -16,9 +16,9 @@ return {
 		["d"] = {name = "boulder_dig:gemstone"},
 		--["df"] = {name = "DIAMONDf"},
 		--["P"] = {name = "INBOX"},
-		--["x"] = {name = "HEXPANDINGWALL"},
-		--["v"] = {name = "VEXPANDINGWALL"},
-		--["V"] = {name = "EXPANDINGWALL"},	
+		["x"] = {name = "boulder_dig:x_expanding_wall"},
+		["v"] = {name = "boulder_dig:z_expanding_wall"},
+		["V"] = {name = "boulder_dig:expanding_wall"},	
 		["c"] = {name = "boulder_dig:butterfly_right"},  --down
 		["C"] = {name = "boulder_dig:butterfly"},    --left
 		["b"] = {name = "boulder_dig:butterfly_right"},  --up
