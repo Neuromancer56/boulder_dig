@@ -267,6 +267,7 @@ dofile(minetest.get_modpath("boulder_dig").."/amoeba.lua")
 dofile(minetest.get_modpath("boulder_dig").."/butterfly.lua")
 dofile(minetest.get_modpath("boulder_dig").."/firefly.lua")
 dofile(minetest.get_modpath("boulder_dig").."/expanding_wall.lua")
+dofile(minetest.get_modpath("boulder_dig").."/slime.lua")
 
 
 minetest.register_on_dieplayer(function(player)
