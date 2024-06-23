@@ -24,7 +24,7 @@ return {
 		["b"] = {name = "boulder_dig:butterfly_right"},  --up
 		["B"] = {name = "boulder_dig:butterfly_right"},   --right
 		["a"] = {name = "boulder_dig:amoeba"},
-		--["s"] = {name = "SLIME"},	
+		["s"] = {name = "boulder_dig:slime"},	
 		["t"] = {name = "xpanes:bar_flat"},
 	},
 	layers = {
