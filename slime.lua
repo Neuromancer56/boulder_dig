@@ -1,19 +1,5 @@
--- Define the slime node
-minetest.register_node("boulder_dig:slime", {
-  description = "Slime",
-  tiles = {
-    "mykota_mykota.png^[colorize:yellow:64"
-  },
-  waving = 1,
-  drawtype = "nodebox",
-  groups = {
-    choppy = 3,
-  },
-  on_construct = function(pos)
-    --local meta = minetest.get_meta(pos)
-    --local fertility_settings = minetest.settings:get("amoeba_fertility") or 5
-    --meta:set_int("fertility", fertility_settings)
 
+function spawn_slime_particles(pos)
     part_id = minetest.add_particlespawner({
       amount = 20,
       time = 1,
@@ -37,6 +23,25 @@ minetest.register_node("boulder_dig:slime", {
       vertical = false,
       collisiondetection = true
     })
+end
+
+-- Define the slime node
+minetest.register_node("boulder_dig:slime", {
+  description = "Slime",
+  tiles = {
+    "mykota_mykota.png^[colorize:yellow:64"
+  },
+  waving = 1,
+  drawtype = "nodebox",
+  groups = {
+    choppy = 3,
+  },
+  on_construct = function(pos)
+    --local meta = minetest.get_meta(pos)
+    --local fertility_settings = minetest.settings:get("amoeba_fertility") or 5
+    --meta:set_int("fertility", fertility_settings)
+	spawn_slime_particles(pos)
+
   end,
 })
 
@@ -45,7 +50,7 @@ minetest.register_node("boulder_dig:slime", {
 minetest.register_abm({
     label = "Slime ABM",
     nodenames = {"boulder_dig:slime"},
-    interval = 10.0,
+    interval = 20.0,
     chance = 1,
     action = function(pos, node)
         local above_pos = {x = pos.x, y = pos.y + 1, z = pos.z}
@@ -56,7 +61,9 @@ minetest.register_abm({
         
         if (above_node == "boulders:boulder" or above_node == "boulder_dig:gemstone") and below_node == "air" then
             if math.random() < 0.3 then  -- 30% chance
-                minetest.set_node(above_pos, {name = "air"})
+                minetest.sound_play("slime-squish-9", {pos = pos, gain = 0.3, max_hear_distance = 10})
+				spawn_slime_particles(pos)
+				minetest.set_node(above_pos, {name = "air"})
                 minetest.set_node(below_pos, {name = above_node})
 				minetest.check_for_falling(below_pos)
             end
