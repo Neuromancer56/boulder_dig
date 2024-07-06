@@ -26,6 +26,8 @@ return {
 		["a"] = {name = "boulder_dig:amoeba"},
 		["s"] = {name = "boulder_dig:slime"},	
 		["t"] = {name = "xpanes:bar_flat"},
+		["D"] = {name = "boulders:dropper"},
+		["L"] = {name = "default:lava_source"},
 	},
 	layers = {
 		{
