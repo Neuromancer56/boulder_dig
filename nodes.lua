@@ -54,7 +54,7 @@ minetest.register_node("boulder_dig:gemstone", {
 	drop = "boulder_dig:gemstone",
 	sounds = default.node_sound_gem_defaults(),
 	on_construct = function(pos, node)
-		check_for_tumbling(pos,"boulder_dig:gemstone",{"boulder_dig:gemstone","boulders:boulder"},"sound_effect_twinkle_sparkle")
+		check_for_tumbling(pos,"boulder_dig:gemstone",{"boulder_dig:gemstone","boulders:boulder","default:cobble"},"sound_effect_twinkle_sparkle")
 		end,
 	light_source = 5, 
 	use_texture_alpha = true,
@@ -247,14 +247,14 @@ end
 minetest.override_item("boulders:boulder", {
 		on_construct = function(pos, node)
 			handle_construct(pos, minetest.get_node(pos))
-			check_for_tumbling(pos,"boulders:boulder",{"boulder_dig:gemstone","boulders:boulder"},"falling_boulder")
+			check_for_tumbling(pos,"boulders:boulder",{"boulder_dig:gemstone","boulders:boulder","default:cobble"},"falling_boulder")
 		end,
 })
 
 minetest.override_item("boulder_dig:gemstone", {
 	on_construct = function(pos, node)
 		handle_construct(pos, minetest.get_node(pos))
-		check_for_tumbling(pos,"boulder_dig:gemstone",{"boulder_dig:gemstone","boulders:boulder"},"sound_effect_twinkle_sparkle")
+		check_for_tumbling(pos,"boulder_dig:gemstone",{"boulder_dig:gemstone","boulders:boulder","default:cobble"},"sound_effect_twinkle_sparkle")
 	end,
 })
 
