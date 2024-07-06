@@ -28,6 +28,7 @@ return {
 		["t"] = {name = "xpanes:bar_flat"},
 		["D"] = {name = "boulders:dropper"},
 		["L"] = {name = "default:lava_source"},
+		["l"] = {name = "default:ladder_wood"},
 	},
 	layers = {
 		{
