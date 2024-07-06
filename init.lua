@@ -22,6 +22,7 @@ levels = {
 	[6] = {gems_needed = 10, gem_points_regular = 20, gem_points_bonus = 50, x_start_loc= 10, y_start_loc=0 , z_start_loc = 10},
 	[7] = {gems_needed = 10, gem_points_regular = 20, gem_points_bonus = 50, x_start_loc= 10, y_start_loc=2 , z_start_loc = 10},
 	[8] = {gems_needed = 5, gem_points_regular = 10, gem_points_bonus = 20, x_start_loc= 2, y_start_loc=4 , z_start_loc = 3},
+	[9] = {gems_needed = 10, gem_points_regular = 10, gem_points_bonus = 20, x_start_loc= 14, y_start_loc=4 , z_start_loc = 3},
     -- Add more levels as needed
 }
 high_score= 0
@@ -52,6 +53,7 @@ if not modpath then
 end
 --local schematic_path1 = modpath .. "\\schematics\\sakura_tree_2.mts"
 local schematic_path1 = modpath .. "\\schematics\\bomb_butterfly.lua"
+local schematic_path2 = modpath .. "\\schematics\\boulder_drop.lua"
 
 --https://www.youtube.com/watch?v=bpzN0fagzi8&t=42s
 --levels
@@ -195,6 +197,12 @@ script_tables = {
 		{"place_node",26,1,2,"boulder_dig:butterfly", true},
 		{"place_node",28,1,2,"boulder_dig:butterfly_right", true},		
 	},
+		--lvl 9: boulder_drop
+	{
+		{"build_ascii_schematic", schematic_path2},	
+		{"place_node",13,11,2,"boulders:dropper", true},
+		{"place_node",16,11,3,"boulders:dropper", true},
+	},	
 	--[[
 	{
 		{"build_schematic", schematic_path1},		 
@@ -240,6 +248,10 @@ exit_script_table = {
 	--lvl 8: bomb_butterfly
 	{
 		--{"place_node",35,2,10,"boulder_dig:exit", true},
+		{"place_node",1,1,3,"boulder_dig:exit", true},
+	},	
+	--lvl 9: boulder_drop
+	{
 		{"place_node",1,1,3,"boulder_dig:exit", true},
 	},	
 	--[[
