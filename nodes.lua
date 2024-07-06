@@ -246,6 +246,7 @@ end
 -- Override the on_falling callback for boulder and gemstone to also do convert_node
 minetest.override_item("boulders:boulder", {
 		on_construct = function(pos, node)
+			check_for_melt_boulder(pos)
 			handle_construct(pos, minetest.get_node(pos))
 			check_for_tumbling(pos,"boulders:boulder",{"boulder_dig:gemstone","boulders:boulder","default:cobble"},"falling_boulder")
 		end,
