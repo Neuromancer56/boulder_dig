@@ -200,8 +200,8 @@ script_tables = {
 		--lvl 9: boulder_drop
 	{
 		{"build_ascii_schematic", schematic_path2},	
-		{"place_node",13,12,2,"boulders:dropper", true},
-		{"place_node",16,12,3,"boulders:dropper", true},
+		{"place_node",13,33,2,"boulders:dropper", true},
+		{"place_node",16,33,3,"boulders:dropper", true},
 	},	
 	--[[
 	{
@@ -252,7 +252,7 @@ exit_script_table = {
 	},	
 	--lvl 9: boulder_drop
 	{
-		{"place_node",1,1,3,"boulder_dig:exit", true},
+		{"place_node",2,36,2,"boulder_dig:exit", true},
 	},	
 	--[[
 	--schematic1
